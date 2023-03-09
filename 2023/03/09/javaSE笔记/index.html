@@ -20,30 +20,32 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="言念君子温其如玉">
-<meta property="og:type" content="website">
+  <meta name="description" content="title: 软件开发流程 需求分析 概要设计 详细设计 编程 测试 实施 基本语法1.1 注释定义：标记某段代码所表达的意思，方便查看代码功能 单行注释（&#x2F;&#x2F;）： 1int i &#x3D; 100; &#x2F;&#x2F;将100赋值给变量i  多行注释（&#x2F;* *&#x2F;）： 123456&#x2F;*这是一个方法*&#x2F;public int add(int a)&amp;#123;    return a;">
+<meta property="og:type" content="article">
 <meta property="og:title" content="嘟嘟可大魔王">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/2023/03/09/javaSE%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="嘟嘟可大魔王">
-<meta property="og:description" content="言念君子温其如玉">
+<meta property="og:description" content="title: 软件开发流程 需求分析 概要设计 详细设计 编程 测试 实施 基本语法1.1 注释定义：标记某段代码所表达的意思，方便查看代码功能 单行注释（&#x2F;&#x2F;）： 1int i &#x3D; 100; &#x2F;&#x2F;将100赋值给变量i  多行注释（&#x2F;* *&#x2F;）： 123456&#x2F;*这是一个方法*&#x2F;public int add(int a)&amp;#123;    return a;">
 <meta property="og:locale" content="zn_CN">
+<meta property="article:published_time" content="2023-03-09T11:14:09.469Z">
+<meta property="article:modified_time" content="2023-03-09T11:25:33.221Z">
 <meta property="article:author" content="yqlt">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2023/03/09/javaSE%E7%AC%94%E8%AE%B0/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zn-CN'
   };
 </script>
 
-  <title>嘟嘟可大魔王</title>
+  <title> | 嘟嘟可大魔王</title>
   
 
 
@@ -141,9 +143,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zn-CN">
@@ -159,10 +162,9 @@
       <meta itemprop="name" content="嘟嘟可大魔王">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
+        <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2023/03/09/javaSE%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">بدون عنوان</a>
-        </h2>
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -186,7 +188,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>title: 软件开发流程</p>
+        <p>title: 软件开发流程</p>
 <p>需求分析</p>
 <p>概要设计</p>
 <p>详细设计</p>
@@ -306,91 +308,30 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">A</span>&#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现类实现接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">AImpl</span> <span class="keyword">implements</span> <span class="title class_">A</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">method</span><span class="params">()</span>&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zn-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/06/hello-world/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="yqlt">
-      <meta itemprop="description" content="言念君子温其如玉">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="嘟嘟可大魔王">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/06/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">نُشر في</span>
-
-              <time title="أُنشأ: 2023-03-06 10:31:13" itemprop="dateCreated datePublished" datetime="2023-03-06T10:31:13+08:00">2023-03-06</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/06/hello-world/" rel="prev" title="Hello World">
+      <i class="fa fa-chevron-left"></i> Hello World
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -443,6 +384,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E6%B3%A8%E9%87%8A"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E6%A0%87%E8%AF%86%E7%AC%A6"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 标识符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%8F%98%E9%87%8F"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E5%88%86%E6%94%AF"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-%E5%BE%AA%E7%8E%AF"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 循环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-%E6%95%B0%E7%BB%84"><span class="nav-number">1.7.</span> <span class="nav-text">1.7 数组</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.</span> <span class="nav-text">面向对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E5%A4%A7%E7%89%B9%E5%BE%81"><span class="nav-number">2.1.</span> <span class="nav-text">三大特征</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-number">2.1.0.2.</span> <span class="nav-text">继承</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E5%86%99"><span class="nav-number">2.1.0.2.1.</span> <span class="nav-text">方法的重写</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E6%80%81"><span class="nav-number">2.1.0.3.</span> <span class="nav-text">多态</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.1.0.3.1.</span> <span class="nav-text">引用数据类型转换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8A%BD%E8%B1%A1%E7%B1%BB%EF%BC%88%E5%A4%A7%E7%B1%BB%E5%88%AB%EF%BC%89"><span class="nav-number">2.1.0.3.2.</span> <span class="nav-text">抽象类（大类别）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%EF%BC%88%E5%B0%8F%E5%8C%BA%E5%88%AB%EF%BC%89"><span class="nav-number">2.1.0.3.3.</span> <span class="nav-text">接口（小区别）</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
