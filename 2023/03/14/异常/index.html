@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="异常含义（粗浅的理解）：在理想的情况下，写出的程序应该会按照我的思想去运行，但是呢，人无完人，总是有考虑不完全的时候，这时候程序就有可能出现一些异常和错误。 一、 异常的类型1.1 运行时异常含义：在编译阶段无法感知代码是否出现问题，只有在程序运行时才会出错，这样的异常被称为运行时异常。  异常也由类定义的，所以的运行时异常都继承于RuntimeException RuntimeException">
+<meta property="og:type" content="article">
+<meta property="og:title" content="异常">
+<meta property="og:url" content="http://example.com/2023/03/14/%E5%BC%82%E5%B8%B8/index.html">
+<meta property="og:site_name" content="嘟嘟可大魔王">
+<meta property="og:description" content="异常含义（粗浅的理解）：在理想的情况下，写出的程序应该会按照我的思想去运行，但是呢，人无完人，总是有考虑不完全的时候，这时候程序就有可能出现一些异常和错误。 一、 异常的类型1.1 运行时异常含义：在编译阶段无法感知代码是否出现问题，只有在程序运行时才会出错，这样的异常被称为运行时异常。  异常也由类定义的，所以的运行时异常都继承于RuntimeException RuntimeException">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-14T06:27:31.031Z">
+<meta property="article:modified_time" content="2023-03-14T06:28:03.600Z">
+<meta property="article:author" content="yqlt">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/03/14/%E5%BC%82%E5%B8%B8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>异常 | 嘟嘟可大魔王</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">嘟嘟可大魔王</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/14/%E5%BC%82%E5%B8%B8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="yqlt">
+      <meta itemprop="description" content="言念君子温其如玉">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘟嘟可大魔王">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          异常
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-03-14 14:27:31 / 修改时间：14:28:03" itemprop="dateCreated datePublished" datetime="2023-03-14T14:27:31+08:00">2023-03-14</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p><strong>含义（粗浅的理解）：</strong>在理想的情况下，写出的程序应该会按照我的思想去运行，但是呢，人无完人，总是有考虑不完全的时候，这时候程序就有可能出现一些异常和错误。</p>
+<h2 id="一、-异常的类型"><a href="#一、-异常的类型" class="headerlink" title="一、 异常的类型"></a>一、 异常的类型</h2><h3 id="1-1-运行时异常"><a href="#1-1-运行时异常" class="headerlink" title="1.1 运行时异常"></a>1.1 运行时异常</h3><p><strong>含义：</strong>在编译阶段无法感知代码是否出现问题，只有在程序运行时才会出错，这样的异常被称为<strong>运行时异常</strong>。</p>
+<blockquote>
+<p>异常也由类定义的，所以的运行时异常都继承于RuntimeException</p>
+<p>RuntimeException继承于Exception</p>
+<p>Exception继承于ThrowException</p>
+</blockquote>
+<h3 id="1-2-编译时异常"><a href="#1-2-编译时异常" class="headerlink" title="1.2 编译时异常"></a>1.2 编译时异常</h3><p><strong>含义：</strong>编译时异常是需要明确指出可能会出现的异常，在编译阶段就需要进行处理（捕捉异常），如果不进行处理。将无法通过编译。</p>
+<blockquote>
+<p>默认继承自Exception类的异常都是编译时异常</p>
+</blockquote>
+<p><strong>注：</strong>文件未找到异常：FileNotFoundException就是一个非常典型的编译时异常（饱受折磨）</p>
+<h3 id="1-3-错误（Error）"><a href="#1-3-错误（Error）" class="headerlink" title="1.3 错误（Error）"></a>1.3 错误（Error）</h3><p><strong>含义：</strong>错误比异常更严重，异常不一定会导致致命的问题，但是错误是致命问题，一版出现错误可能jvm无法继续正常运行，例如StackOverError就是内存溢出错误（递归没有结束符号）</p>
+<blockquote>
+<p>Error继承于Throwable</p>
+<p>Error是所有错误的父类</p>
+</blockquote>
+<h3 id="1-4-自定义异常"><a href="#1-4-自定义异常" class="headerlink" title="1.4 自定义异常"></a>1.4 自定义异常</h3><p>自定义编译时异常：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyException</span> <span class="keyword">extends</span> <span class="title class_">Exception</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyException</span><span class="params">(String message)</span>&#123; <span class="comment">// message表示错误的原因</span></span><br><span class="line">        <span class="built_in">super</span>(message)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义运行时异常：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyException</span> <span class="keyword">extends</span> <span class="title class_">RuntimeException</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyException</span><span class="params">(String message)</span>&#123; <span class="comment">// message表示错误的原因</span></span><br><span class="line">        <span class="built_in">super</span>(message)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、-抛出异常"><a href="#二、-抛出异常" class="headerlink" title="二、 抛出异常"></a>二、 抛出异常</h2><blockquote>
+<p>当调用方法时，如果因为错误的参数导致程序无法正常运行时，我们可以手动抛出一个异常来阻止程序继续运行下去（利用throw关键字）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(b==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;被除数不能为0&quot;</span>); <span class="comment">// 使用throw抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果在方法中抛出一个非运行时异常，那么就一定要告知方法的调用者，我们会抛出这个异常（利用关键字throws）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;我是必须告知的异常&quot;</span>); <span class="comment">// 使用throw抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、-异常的处理"><a href="#三、-异常的处理" class="headerlink" title="三、 异常的处理"></a>三、 异常的处理</h2><blockquote>
+<p>之前已经了解到了如何将异常抛出（渣男行为），那么我们要如何去将抛出的异常处理呢（坚决不做渣男，咱是有责任心的），这就要用到try-catch-finally语句</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;我是必须告知的异常&quot;</span>); <span class="comment">// 使用throw抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            test(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>&#123;</span><br><span class="line">            System.out.println(e.getMessage); <span class="comment">// 获取错误的信息</span></span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;我是一定能运行的&quot;</span>); <span class="comment">// finally是一定可以运行的，常用于关闭一些连接（后期会遇见）</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;程序继续进行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以将代码编写到<code>try</code>语句块中，只要是在这个范围内发生的异常，都可以被捕获，使用<code>catch</code>关键字对指定的异常进行捕获。</p>
+<p><strong>注：</strong>如果某个方法明确指出会抛出那些异常，除非是运行时异常，否则我们一定要用try-catch-finally语句进行捕捉，不然就无法通过编译。</p>
+<p>渣男行为（不推荐）:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;我是必须告知的异常&quot;</span>); <span class="comment">// 使用throw抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        test(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>此时发生异常时，就会直接交给JVM处理，默认让整个程序终止并打印栈追踪信息</p>
+<blockquote>
+<p>使用一个try-catch语句时，catch语句可以有多个，异常要从小到大的排序</p>
+</blockquote>
+<h2 id="常见的异常（SE阶段可能遇见的）："><a href="#常见的异常（SE阶段可能遇见的）：" class="headerlink" title="常见的异常（SE阶段可能遇见的）："></a>常见的异常（SE阶段可能遇见的）：</h2><p>算术异常类：ArithmeticExecption</p>
+<p>空指针异常类：NullPointerException</p>
+<p>类型强制转换异常：ClassCastException</p>
+<p>数组负下标异常：NegativeArrayException</p>
+<p>数组下标越界异常：ArrayIndexOutOfBoundsException</p>
+<p>文件未找到异常：FileNotFoundException</p>
+<p>字符串转换为数字异常：NumberFormatException</p>
+<p>操作数据库异常：SQLException</p>
+<p>输入输出异常：IOException</p>
+<p>方法未找到异常：NoSuchMethodException</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/14/%E9%9B%86%E5%90%88%EF%BC%88Collection%EF%BC%89/" rel="prev" title="集合（Collection）">
+      <i class="fa fa-chevron-left"></i> 集合（Collection）
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%82%E5%B8%B8"><span class="nav-number">1.</span> <span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E5%BC%82%E5%B8%B8%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">一、 异常的类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E8%BF%90%E8%A1%8C%E6%97%B6%E5%BC%82%E5%B8%B8"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 运行时异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E7%BC%96%E8%AF%91%E6%97%B6%E5%BC%82%E5%B8%B8"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2 编译时异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E9%94%99%E8%AF%AF%EF%BC%88Error%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.3 错误（Error）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.4 自定义异常</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8"><span class="nav-number">1.2.</span> <span class="nav-text">二、 抛出异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81-%E5%BC%82%E5%B8%B8%E7%9A%84%E5%A4%84%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">三、 异常的处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E5%BC%82%E5%B8%B8%EF%BC%88SE%E9%98%B6%E6%AE%B5%E5%8F%AF%E8%83%BD%E9%81%87%E8%A7%81%E7%9A%84%EF%BC%89%EF%BC%9A"><span class="nav-number">1.4.</span> <span class="nav-text">常见的异常（SE阶段可能遇见的）：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">yqlt</p>
+  <div class="site-description" itemprop="description">言念君子温其如玉</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yqlt</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
