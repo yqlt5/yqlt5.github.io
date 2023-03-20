@@ -170,10 +170,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-03-18 19:53:09 / 修改时间：19:53:42" itemprop="dateCreated datePublished" datetime="2023-03-18T19:53:09+08:00">2023-03-18</time>
+              <time title="创建时间：2023-03-18 19:53:09" itemprop="dateCreated datePublished" datetime="2023-03-18T19:53:09+08:00">2023-03-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-03-20 08:41:24" itemprop="dateModified" datetime="2023-03-20T08:41:24+08:00">2023-03-20</time>
+              </span>
 
           
 
@@ -369,7 +375,7 @@
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyTest</span>()&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">// new</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>();</span><br><span class="line">        <span class="comment">// 反射</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> String.class;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> (String) clazz.newInstance();</span><br><span class="line">        <span class="comment">// 使用clone方法</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> (String)s2.clone();</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>序列化机制参考：</p>
+<p>序列化机制参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_19782019/article/details/80422143">(38条消息) Java基础——对象的序列化（通俗易懂，排版优美）_刘扬俊的博客-CSDN博客</a></p>
 
       
     </div>
@@ -473,7 +479,7 @@
 <p><img src="/../pic/%E8%AE%BE%E7%BD%AEssh5.PNG" alt="设置ssh5"></p>
 <p>添加成功后</p>
 <blockquote>
-<p>输入：ssh -T <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#x63;&#111;&#x6d;">&#x67;&#105;&#x74;&#x40;&#x67;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#x63;&#111;&#x6d;</a></p>
+<p>输入：ssh -T <a href="mailto:&#x67;&#105;&#x74;&#x40;&#103;&#105;&#116;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#105;&#x74;&#x40;&#103;&#105;&#116;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
 </blockquote>
 <p>第一次使用会出现这种，输入yes即可</p>
 <p><img src="/../pic/%E8%AE%BE%E7%BD%AEssh6.PNG" alt="设置ssh6"></p>
@@ -513,7 +519,7 @@
 <p><img src="/../pic/%E9%83%A8%E7%BD%B21.PNG" alt="部署1"></p>
 <p>将原本的内容改为下面（repository为你的仓库地址）</p>
 <blockquote>
-<p>deploy:<br>  type: git<br>  repository: <a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#109;">&#103;&#105;&#x74;&#64;&#103;&#105;&#116;&#104;&#117;&#98;&#46;&#x63;&#x6f;&#109;</a>:yqlt5&#x2F;yqlt5.github.io.git  #你的仓库地址<br>  branch: master</p>
+<p>deploy:<br>  type: git<br>  repository: <a href="mailto:&#103;&#x69;&#116;&#64;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#111;&#x6d;</a>:yqlt5&#x2F;yqlt5.github.io.git  #你的仓库地址<br>  branch: master</p>
 </blockquote>
 <p>接着就是将项目上传至GitHub仓库内</p>
 <blockquote>
@@ -1192,6 +1198,8 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="yqlt"
+      src="/images/avatar.gif">
   <p class="site-author-name" itemprop="name">yqlt</p>
   <div class="site-description" itemprop="description">言念君子，温其如玉</div>
 </div>
