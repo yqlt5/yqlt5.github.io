@@ -188,7 +188,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-21 19:18:48" itemprop="dateModified" datetime="2023-03-21T19:18:48+08:00">2023-03-21</time>
+                <time title="修改时间：2023-03-21 21:38:05" itemprop="dateModified" datetime="2023-03-21T21:38:05+08:00">2023-03-21</time>
               </span>
 
           
@@ -428,7 +428,45 @@
 <h3 id="（28）多态是什么？"><a href="#（28）多态是什么？" class="headerlink" title="（28）多态是什么？"></a>（28）多态是什么？</h3><blockquote>
 <p>多态是同一行为具有不同表现形式或形态的能力，即对象多种表现形式的体现，就是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量到底会指向哪个类，即一个引用变量到底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。</p>
 </blockquote>
-<p>（29）</p>
+<h3 id="（29）多态存在的三个必要条件"><a href="#（29）多态存在的三个必要条件" class="headerlink" title="（29）多态存在的三个必要条件"></a>（29）多态存在的三个必要条件</h3><blockquote>
+<p>1、一定要有继承</p>
+<p>2、要有方法的重写</p>
+<p>3、父类引用指向子类对象（父类类型 变量名 &#x3D; new 子类构造器）</p>
+</blockquote>
+<h3 id="（30）TreeMap，HashMap，LinkedHashMap的区别"><a href="#（30）TreeMap，HashMap，LinkedHashMap的区别" class="headerlink" title="（30）TreeMap，HashMap，LinkedHashMap的区别"></a>（30）TreeMap，HashMap，LinkedHashMap的区别</h3><blockquote>
+<p>TreeMap：存储有序，默认时按key的升序排序，也可以指定比较器；当使用迭代器（Iterator）遍历时，得到的结果时排过序的</p>
+<p>HashMap：存储无序，具有很快的访问速度；只允许一条元素的key为null，value没有限制；不支持线程的同步</p>
+<p>LinkedHashMap：存储有序</p>
+</blockquote>
+<p>详细：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/acm-bingzi/p/javaMap.html">HashMap,LinkedHashMap,TreeMap的区别（转） - 贾树丙 - 博客园 (cnblogs.com)</a></p>
+<h3 id="（31）什么是反射"><a href="#（31）什么是反射" class="headerlink" title="（31）什么是反射"></a>（31）什么是反射</h3><blockquote>
+<p>在运行时，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法，这种动态获取信息以及动态调用对象的功能称为Java反射机制</p>
+<p>反射就是动态加载对象，并对对象进行剖析。</p>
+</blockquote>
+<h3 id="（32）反射的作用"><a href="#（32）反射的作用" class="headerlink" title="（32）反射的作用"></a>（32）反射的作用</h3><blockquote>
+<p>1、在运行时判断任意一个对象所属的类型</p>
+<p>2、在运行时构造任意一个类的对象</p>
+<p>3、在运行时判断任意一个类所具备的成员变量和方法</p>
+<p>4、在运行时调用任意一个对象的方法</p>
+</blockquote>
+<h3 id="（33）break和continue的区别"><a href="#（33）break和continue的区别" class="headerlink" title="（33）break和continue的区别"></a>（33）break和continue的区别</h3><blockquote>
+<p>两者都是用来控制循环的语句</p>
+<p>break用来完全结束一个循环语句，跳出循环体执行后面的语句</p>
+<p>continue是跳过本次循环，直接进行下次循环</p>
+</blockquote>
+<h3 id="（34）运行时异常与一般异常有何异同"><a href="#（34）运行时异常与一般异常有何异同" class="headerlink" title="（34）运行时异常与一般异常有何异同"></a>（34）运行时异常与一般异常有何异同</h3><blockquote>
+<p>异常表示程序运行过程中可能出现的非正常状态，运行时异常表示虚拟机的通常操作中可能遇到的异常，是一种常见运行错误。</p>
+<p>Java编译器要求方法必须声明抛出可能发生的非运行时异常，但是并不要求必须声明抛出未被捕获的运行时异常。</p>
+</blockquote>
+<h3 id="（35）Collection和Collections的区别"><a href="#（35）Collection和Collections的区别" class="headerlink" title="（35）Collection和Collections的区别"></a>（35）Collection和Collections的区别</h3><blockquote>
+<p>Collection时集合类的上级接口。继承它的接口主要有Set和List</p>
+<p>Collections是针对集合类的一个工具类（帮助类），提供了一系列静态方法实现对各种集合的搜索，排序，线程安全化等操作。简化了对集合的操作</p>
+</blockquote>
+<h3 id="（36）Error和Exception有什么区别"><a href="#（36）Error和Exception有什么区别" class="headerlink" title="（36）Error和Exception有什么区别"></a>（36）Error和Exception有什么区别</h3><blockquote>
+<p>Error：是系统中的错误，程序员是不能改变的和处理的，是在程序编译时出现的错误，只能通过修改程序才能修正。一般是指与虚拟机相关的问题，如系统崩溃，虚拟机错误，内存空间不足，方法调用栈溢等。对于这类错误的导致的应用程序中断，仅靠程序本身无法恢复和和预防，遇到这样的错误，建议让程序终止。</p>
+<p>Exception：表示程序可以处理的异常，可以捕获且可能恢复。遇到这类异常，应该尽可能处理异常，使程序恢复运行，而不应该随意终止异常。</p>
+</blockquote>
+<p>详细：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43698561/article/details/104382643">(38条消息) 面试题整理:Error与Exception的区别_exception与error区别_Jxfor。的博客-CSDN博客</a></p>
 
       
     </div>
@@ -538,7 +576,7 @@
 <p><img src="/../pic/%E8%AE%BE%E7%BD%AEssh5.PNG" alt="设置ssh5"></p>
 <p>添加成功后</p>
 <blockquote>
-<p>输入：ssh -T <a href="mailto:&#103;&#105;&#x74;&#x40;&#103;&#105;&#116;&#104;&#117;&#x62;&#46;&#x63;&#x6f;&#109;">&#103;&#105;&#x74;&#x40;&#103;&#105;&#116;&#104;&#117;&#x62;&#46;&#x63;&#x6f;&#109;</a></p>
+<p>输入：ssh -T <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#46;&#x63;&#111;&#109;">&#103;&#105;&#116;&#64;&#103;&#x69;&#x74;&#104;&#117;&#x62;&#46;&#x63;&#111;&#109;</a></p>
 </blockquote>
 <p>第一次使用会出现这种，输入yes即可</p>
 <p><img src="/../pic/%E8%AE%BE%E7%BD%AEssh6.PNG" alt="设置ssh6"></p>
