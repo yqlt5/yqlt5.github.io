@@ -74,6 +74,8 @@
   </style>
 </noscript>
 
+  
+  
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -157,6 +159,69 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/27/%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E4%B8%AD%E5%BF%83%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="yqlt">
+      <meta itemprop="description" content="言念君子，温其如玉">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘟嘟可大魔王">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/03/27/%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E4%B8%AD%E5%BF%83%EF%BC%89/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-03-27 20:12:07" itemprop="dateCreated datePublished" datetime="2023-03-27T20:12:07+08:00">2023-03-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="项目（个人用户中心）"><a href="#项目（个人用户中心）" class="headerlink" title="项目（个人用户中心）"></a>项目（个人用户中心）</h1><p>前端</p>
+<p>安装ant design pro（先安装nodejs）</p>
+<p>初始化：npm i @ant-design&#x2F;pro-cli -g  （初始化脚手架）</p>
+<p>​				pro create myapp</p>
+<p>安装一个自动生成前端界面代码的可视化编程工具</p>
+<p>npm install –save-dev @umijs&#x2F;preset-ui</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/18/Java%E5%85%AB%E8%82%A1%E6%96%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -188,7 +253,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-21 21:38:05" itemprop="dateModified" datetime="2023-03-21T21:38:05+08:00">2023-03-21</time>
+                <time title="修改时间：2023-03-24 08:56:56" itemprop="dateModified" datetime="2023-03-24T08:56:56+08:00">2023-03-24</time>
               </span>
 
           
@@ -359,9 +424,9 @@
 <p>TreeSet：由一个树形的结构来实现的，它里面的元素是有序的，add(),remove(),contains()方法的时间复杂度是O(logn)</p>
 </blockquote>
 <h3 id="（16）强引用，弱引用，软引用，虚引用的区别"><a href="#（16）强引用，弱引用，软引用，虚引用的区别" class="headerlink" title="（16）强引用，弱引用，软引用，虚引用的区别"></a>（16）强引用，弱引用，软引用，虚引用的区别</h3><blockquote>
-<p><strong>强引用：</strong>最普遍的一种引用方式，例如String s &#x3D; “abc”，变量s就是字符串“abc”的强引用，只要强引用存在，则垃圾回收器就不会回收这个对象。</p>
+<p><strong>强引用（StrongReference）：</strong>最普遍的一种引用方式，例如String s &#x3D; “abc”，变量s就是字符串“abc”的强引用，只要强引用存在，则垃圾回收器就不会回收这个对象。</p>
 <p><strong>软引用（SoftReference）：</strong>用于描述还要用非必须的对象，如果内存足够，不回收，如果内存不足时，则回收。一般用于双向内存敏感的<strong>高速缓存</strong>，软引用可以和队列ReferenceQueue联合使用，如果软引用的对象被垃圾回收，JVM就会把这个软引用加入到与之关联的引用队列中</p>
-<p>弱引用（WeakReference）：弱引用与软引用大致相同，弱引用与软引用的区别：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现只具有弱引用的对象，不管当前内存是否足够，都会回收它的内存</p>
+<p><strong>弱引用（WeakReference）</strong>：弱引用与软引用大致相同，弱引用与软引用的区别：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现只具有弱引用的对象，不管当前内存是否足够，都会回收它的内存</p>
 <p><strong>虚引用（PhantomReference）：</strong>就是形同虚设，与其他几种引用都不同，虚引用并不会决定对象的生命周期。如果一个对象只有虚引用，那么它和没有任何引用一样，在任何时候都可能被垃圾回收器回收。虚引用只要用来跟踪对象被垃圾回收器回收的活动。</p>
 <p>虚引用与弱引用和软引用的一个区别：虚引用必须与引用队列（ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引，就会在回收对象的内存之前，把这个虚引用加入到与之关联的引用队列中。</p>
 </blockquote>
@@ -1314,7 +1379,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1365,6 +1430,8 @@
   </div>
 
   
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -1401,6 +1468,9 @@
   
 
   
+  
 
+  
+  <script type="text/javascript" src="/js/my_js/clicklove.js"></script>
 </body>
 </html>
