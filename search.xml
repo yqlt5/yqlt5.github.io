@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>new接口？</title>
+    <url>/2023/03/09/new%E6%8E%A5%E5%8F%A3/</url>
+    <content><![CDATA[<p>new接口？？？接口不是没有构造器，不能new吗？？？</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//实现类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> <span class="keyword">implements</span> <span class="title class_">A</span>,B&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot; &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//利用匿名内部类的方式去&quot;new&quot;接口</span></span><br><span class="line">        <span class="type">A</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">A</span>()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;lala&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        a.eat();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译后的class文件<br><img src="/../pic/1.png"></p>
+<p>编译器会自动生成一个Test$1.class去实现接口</p>
+<p>通过反编译：</p>
+<p><img src="/../pic/2.png"></p>
+]]></content>
+  </entry>
+  <entry>
     <title>Hello World</title>
     <url>/2023/03/06/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -144,6 +156,68 @@
 ]]></content>
   </entry>
   <entry>
+    <title>异常</title>
+    <url>/2023/03/14/%E5%BC%82%E5%B8%B8/</url>
+    <content><![CDATA[<h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p><strong>含义（粗浅的理解）：</strong>在理想的情况下，写出的程序应该会按照我的思想去运行，但是呢，人无完人，总是有考虑不完全的时候，这时候程序就有可能出现一些异常和错误。</p>
+<h2 id="一、-异常的类型"><a href="#一、-异常的类型" class="headerlink" title="一、 异常的类型"></a>一、 异常的类型</h2><h3 id="1-1-运行时异常"><a href="#1-1-运行时异常" class="headerlink" title="1.1 运行时异常"></a>1.1 运行时异常</h3><p><strong>含义：</strong>在编译阶段无法感知代码是否出现问题，只有在程序运行时才会出错，这样的异常被称为<strong>运行时异常</strong>。</p>
+<blockquote>
+<p>异常也由类定义的，所以的运行时异常都继承于RuntimeException</p>
+<p>RuntimeException继承于Exception</p>
+<p>Exception继承于ThrowException</p>
+</blockquote>
+<h3 id="1-2-编译时异常"><a href="#1-2-编译时异常" class="headerlink" title="1.2 编译时异常"></a>1.2 编译时异常</h3><p><strong>含义：</strong>编译时异常是需要明确指出可能会出现的异常，在编译阶段就需要进行处理（捕捉异常），如果不进行处理。将无法通过编译。</p>
+<blockquote>
+<p>默认继承自Exception类的异常都是编译时异常</p>
+</blockquote>
+<p><strong>注：</strong>文件未找到异常：FileNotFoundException就是一个非常典型的编译时异常（饱受折磨）</p>
+<h3 id="1-3-错误（Error）"><a href="#1-3-错误（Error）" class="headerlink" title="1.3 错误（Error）"></a>1.3 错误（Error）</h3><p><strong>含义：</strong>错误比异常更严重，异常不一定会导致致命的问题，但是错误是致命问题，一版出现错误可能jvm无法继续正常运行，例如StackOverError就是内存溢出错误（递归没有结束符号）</p>
+<blockquote>
+<p>Error继承于Throwable</p>
+<p>Error是所有错误的父类</p>
+</blockquote>
+<h3 id="1-4-自定义异常"><a href="#1-4-自定义异常" class="headerlink" title="1.4 自定义异常"></a>1.4 自定义异常</h3><p>自定义编译时异常：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyException</span> <span class="keyword">extends</span> <span class="title class_">Exception</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyException</span><span class="params">(String message)</span>&#123; <span class="comment">// message表示错误的原因</span></span><br><span class="line">        <span class="built_in">super</span>(message)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自定义运行时异常：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyException</span> <span class="keyword">extends</span> <span class="title class_">RuntimeException</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyException</span><span class="params">(String message)</span>&#123; <span class="comment">// message表示错误的原因</span></span><br><span class="line">        <span class="built_in">super</span>(message)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、-抛出异常"><a href="#二、-抛出异常" class="headerlink" title="二、 抛出异常"></a>二、 抛出异常</h2><blockquote>
+<p>当调用方法时，如果因为错误的参数导致程序无法正常运行时，我们可以手动抛出一个异常来阻止程序继续运行下去（利用throw关键字）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(b==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;被除数不能为0&quot;</span>); <span class="comment">// 使用throw抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果在方法中抛出一个非运行时异常，那么就一定要告知方法的调用者，我们会抛出这个异常（利用关键字throws）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;我是必须告知的异常&quot;</span>); <span class="comment">// 使用throw抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、-异常的处理"><a href="#三、-异常的处理" class="headerlink" title="三、 异常的处理"></a>三、 异常的处理</h2><blockquote>
+<p>之前已经了解到了如何将异常抛出（渣男行为），那么我们要如何去将抛出的异常处理呢（坚决不做渣男，咱是有责任心的），这就要用到try-catch-finally语句</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;我是必须告知的异常&quot;</span>); <span class="comment">// 使用throw抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            test(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>&#123;</span><br><span class="line">            System.out.println(e.getMessage); <span class="comment">// 获取错误的信息</span></span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;我是一定能运行的&quot;</span>); <span class="comment">// finally是一定可以运行的，常用于关闭一些连接（后期会遇见）</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;程序继续进行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以将代码编写到<code>try</code>语句块中，只要是在这个范围内发生的异常，都可以被捕获，使用<code>catch</code>关键字对指定的异常进行捕获。</p>
+<p><strong>注：</strong>如果某个方法明确指出会抛出那些异常，除非是运行时异常，否则我们一定要用try-catch-finally语句进行捕捉，不然就无法通过编译。</p>
+<p>渣男行为（不推荐）:</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;我是必须告知的异常&quot;</span>); <span class="comment">// 使用throw抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        test(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注：</strong>此时发生异常时，就会直接交给JVM处理，默认让整个程序终止并打印栈追踪信息</p>
+<blockquote>
+<p>使用一个try-catch语句时，catch语句可以有多个，异常要从小到大的排序</p>
+</blockquote>
+<h2 id="常见的异常（SE阶段可能遇见的）："><a href="#常见的异常（SE阶段可能遇见的）：" class="headerlink" title="常见的异常（SE阶段可能遇见的）："></a>常见的异常（SE阶段可能遇见的）：</h2><p>算术异常类：ArithmeticExecption</p>
+<p>空指针异常类：NullPointerException</p>
+<p>类型强制转换异常：ClassCastException</p>
+<p>数组负下标异常：NegativeArrayException</p>
+<p>数组下标越界异常：ArrayIndexOutOfBoundsException</p>
+<p>文件未找到异常：FileNotFoundException</p>
+<p>字符串转换为数字异常：NumberFormatException</p>
+<p>操作数据库异常：SQLException</p>
+<p>输入输出异常：IOException</p>
+<p>方法未找到异常：NoSuchMethodException</p>
+]]></content>
+  </entry>
+  <entry>
     <title>搭建个人博客（血与泪的教训）</title>
     <url>/2023/03/16/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88hexo+git+github+nodejs%EF%BC%89/</url>
     <content><![CDATA[<h1 id="搭建个人博客（hexo-git-github-nodejs）"><a href="#搭建个人博客（hexo-git-github-nodejs）" class="headerlink" title="搭建个人博客（hexo+git+github+nodejs）"></a>搭建个人博客（hexo+git+github+nodejs）</h1><h2 id="1、安装git"><a href="#1、安装git" class="headerlink" title="1、安装git"></a>1、安装git</h2><p>进入git官网进行下载（官网：<a href="https://git-scm.com/">Git (git-scm.com)</a>）：</p>
@@ -191,7 +265,7 @@
 <p><img src="/../pic/%E8%AE%BE%E7%BD%AEssh5.PNG" alt="设置ssh5"></p>
 <p>添加成功后</p>
 <blockquote>
-<p>输入：ssh -T <a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#98;&#46;&#99;&#x6f;&#x6d;">&#103;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#98;&#46;&#99;&#x6f;&#x6d;</a></p>
+<p>输入：ssh -T <a href="mailto:&#x67;&#105;&#x74;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#105;&#x74;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;</a></p>
 </blockquote>
 <p>第一次使用会出现这种，输入yes即可</p>
 <p><img src="/../pic/%E8%AE%BE%E7%BD%AEssh6.PNG" alt="设置ssh6"></p>
@@ -369,80 +443,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>new接口？</title>
-    <url>/2023/03/09/new%E6%8E%A5%E5%8F%A3/</url>
-    <content><![CDATA[<p>new接口？？？接口不是没有构造器，不能new吗？？？</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//实现类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> <span class="keyword">implements</span> <span class="title class_">A</span>,B&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot; &quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//利用匿名内部类的方式去&quot;new&quot;接口</span></span><br><span class="line">        <span class="type">A</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">A</span>()&#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">eat</span><span class="params">()</span> &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;lala&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        a.eat();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>编译后的class文件<br><img src="/../pic/1.png"></p>
-<p>编译器会自动生成一个Test$1.class去实现接口</p>
-<p>通过反编译：</p>
-<p><img src="/../pic/2.png"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>异常</title>
-    <url>/2023/03/14/%E5%BC%82%E5%B8%B8/</url>
-    <content><![CDATA[<h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><p><strong>含义（粗浅的理解）：</strong>在理想的情况下，写出的程序应该会按照我的思想去运行，但是呢，人无完人，总是有考虑不完全的时候，这时候程序就有可能出现一些异常和错误。</p>
-<h2 id="一、-异常的类型"><a href="#一、-异常的类型" class="headerlink" title="一、 异常的类型"></a>一、 异常的类型</h2><h3 id="1-1-运行时异常"><a href="#1-1-运行时异常" class="headerlink" title="1.1 运行时异常"></a>1.1 运行时异常</h3><p><strong>含义：</strong>在编译阶段无法感知代码是否出现问题，只有在程序运行时才会出错，这样的异常被称为<strong>运行时异常</strong>。</p>
-<blockquote>
-<p>异常也由类定义的，所以的运行时异常都继承于RuntimeException</p>
-<p>RuntimeException继承于Exception</p>
-<p>Exception继承于ThrowException</p>
-</blockquote>
-<h3 id="1-2-编译时异常"><a href="#1-2-编译时异常" class="headerlink" title="1.2 编译时异常"></a>1.2 编译时异常</h3><p><strong>含义：</strong>编译时异常是需要明确指出可能会出现的异常，在编译阶段就需要进行处理（捕捉异常），如果不进行处理。将无法通过编译。</p>
-<blockquote>
-<p>默认继承自Exception类的异常都是编译时异常</p>
-</blockquote>
-<p><strong>注：</strong>文件未找到异常：FileNotFoundException就是一个非常典型的编译时异常（饱受折磨）</p>
-<h3 id="1-3-错误（Error）"><a href="#1-3-错误（Error）" class="headerlink" title="1.3 错误（Error）"></a>1.3 错误（Error）</h3><p><strong>含义：</strong>错误比异常更严重，异常不一定会导致致命的问题，但是错误是致命问题，一版出现错误可能jvm无法继续正常运行，例如StackOverError就是内存溢出错误（递归没有结束符号）</p>
-<blockquote>
-<p>Error继承于Throwable</p>
-<p>Error是所有错误的父类</p>
-</blockquote>
-<h3 id="1-4-自定义异常"><a href="#1-4-自定义异常" class="headerlink" title="1.4 自定义异常"></a>1.4 自定义异常</h3><p>自定义编译时异常：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyException</span> <span class="keyword">extends</span> <span class="title class_">Exception</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyException</span><span class="params">(String message)</span>&#123; <span class="comment">// message表示错误的原因</span></span><br><span class="line">        <span class="built_in">super</span>(message)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>自定义运行时异常：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyException</span> <span class="keyword">extends</span> <span class="title class_">RuntimeException</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">MyException</span><span class="params">(String message)</span>&#123; <span class="comment">// message表示错误的原因</span></span><br><span class="line">        <span class="built_in">super</span>(message)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="二、-抛出异常"><a href="#二、-抛出异常" class="headerlink" title="二、 抛出异常"></a>二、 抛出异常</h2><blockquote>
-<p>当调用方法时，如果因为错误的参数导致程序无法正常运行时，我们可以手动抛出一个异常来阻止程序继续运行下去（利用throw关键字）</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(b==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">RuntimeException</span>(<span class="string">&quot;被除数不能为0&quot;</span>); <span class="comment">// 使用throw抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>如果在方法中抛出一个非运行时异常，那么就一定要告知方法的调用者，我们会抛出这个异常（利用关键字throws）</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;我是必须告知的异常&quot;</span>); <span class="comment">// 使用throw抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="三、-异常的处理"><a href="#三、-异常的处理" class="headerlink" title="三、 异常的处理"></a>三、 异常的处理</h2><blockquote>
-<p>之前已经了解到了如何将异常抛出（渣男行为），那么我们要如何去将抛出的异常处理呢（坚决不做渣男，咱是有责任心的），这就要用到try-catch-finally语句</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;我是必须告知的异常&quot;</span>); <span class="comment">// 使用throw抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            test(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">        &#125;<span class="keyword">catch</span>&#123;</span><br><span class="line">            System.out.println(e.getMessage); <span class="comment">// 获取错误的信息</span></span><br><span class="line">        &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;我是一定能运行的&quot;</span>); <span class="comment">// finally是一定可以运行的，常用于关闭一些连接（后期会遇见）</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;程序继续进行&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们可以将代码编写到<code>try</code>语句块中，只要是在这个范围内发生的异常，都可以被捕获，使用<code>catch</code>关键字对指定的异常进行捕获。</p>
-<p><strong>注：</strong>如果某个方法明确指出会抛出那些异常，除非是运行时异常，否则我们一定要用try-catch-finally语句进行捕捉，不然就无法通过编译。</p>
-<p>渣男行为（不推荐）:</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(<span class="type">int</span> a,<span class="type">int</span> b)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Exception</span>(<span class="string">&quot;我是必须告知的异常&quot;</span>); <span class="comment">// 使用throw抛出异常</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span><span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        test(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>注：</strong>此时发生异常时，就会直接交给JVM处理，默认让整个程序终止并打印栈追踪信息</p>
-<blockquote>
-<p>使用一个try-catch语句时，catch语句可以有多个，异常要从小到大的排序</p>
-</blockquote>
-<h2 id="常见的异常（SE阶段可能遇见的）："><a href="#常见的异常（SE阶段可能遇见的）：" class="headerlink" title="常见的异常（SE阶段可能遇见的）："></a>常见的异常（SE阶段可能遇见的）：</h2><p>算术异常类：ArithmeticExecption</p>
-<p>空指针异常类：NullPointerException</p>
-<p>类型强制转换异常：ClassCastException</p>
-<p>数组负下标异常：NegativeArrayException</p>
-<p>数组下标越界异常：ArrayIndexOutOfBoundsException</p>
-<p>文件未找到异常：FileNotFoundException</p>
-<p>字符串转换为数字异常：NumberFormatException</p>
-<p>操作数据库异常：SQLException</p>
-<p>输入输出异常：IOException</p>
-<p>方法未找到异常：NoSuchMethodException</p>
-]]></content>
-  </entry>
-  <entry>
     <title></title>
     <url>/2023/03/27/%E9%A1%B9%E7%9B%AE%EF%BC%88%E4%B8%AA%E4%BA%BA%E7%94%A8%E6%88%B7%E4%B8%AD%E5%BF%83%EF%BC%89/</url>
     <content><![CDATA[<h1 id="项目（个人用户中心）"><a href="#项目（个人用户中心）" class="headerlink" title="项目（个人用户中心）"></a>项目（个人用户中心）</h1><p>前端</p>
@@ -451,276 +451,6 @@
 <p>​				pro create myapp</p>
 <p>安装一个自动生成前端界面代码的可视化编程工具</p>
 <p>npm install –save-dev @umijs&#x2F;preset-ui</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>八股文</title>
-    <url>/2023/03/18/Java%E5%85%AB%E8%82%A1%E6%96%87/</url>
-    <content><![CDATA[<h1 id="Java八股文"><a href="#Java八股文" class="headerlink" title="Java八股文"></a>Java八股文</h1><h2 id="参考网站："><a href="#参考网站：" class="headerlink" title="参考网站："></a>参考网站：</h2><p>基础知识：<a href="https://github.com/wolverinn/Waking-Up">https://github.com/wolverinn/Waking-Up</a></p>
-<h2 id="一、Java基础"><a href="#一、Java基础" class="headerlink" title="一、Java基础"></a>一、Java基础</h2><h3 id="（1）final关键字的作用？"><a href="#（1）final关键字的作用？" class="headerlink" title="（1）final关键字的作用？"></a>（1）final关键字的作用？</h3><blockquote>
-<p>被final修饰的类不可被继承（断子绝孙）</p>
-<p>被final修饰的方法不能被重写，JVM会尝试将其内联，提高运行效率（内联函数，详情见：<a href="https://blog.csdn.net/ke_weiquan/article/details/51946174">(38条消息) JVM 方法内联_柯柯为为的博客-CSDN博客</a>）</p>
-<p>被final修饰的变量不能被改变</p>
-<p>修饰引用，表示引用不可变，指向的内容可变（例如：单例模式）</p>
-<p>修饰常量，在编译阶段会存入常量池中</p>
-</blockquote>
-<h3 id="（2）抽象类（abstract）和接口（interface）有什么区别？"><a href="#（2）抽象类（abstract）和接口（interface）有什么区别？" class="headerlink" title="（2）抽象类（abstract）和接口（interface）有什么区别？"></a>（2）抽象类（abstract）和接口（interface）有什么区别？</h3><blockquote>
-<p><strong>抽象类：</strong>声明方法的存在而不实现；用于创建一个表明某些基本行为的类，并为该类声明方法，但是不实现方法；抽象类不能对象实例化，需要一个子类去继承实现抽象类，子类如果没有实现父类的全部抽象方法，仍未抽象类；不能有抽象构造方法和抽象静态方法</p>
-<p><strong>意义：</strong>为其他子类提供一个公共的类型；封装子类中重复定义的内容；定义抽象方法，子类虽然不同的实现，但是定义时是一致的</p>
-</blockquote>
-<blockquote>
-<p><strong>接口：</strong>只有抽象方法和静态变量；接口可以实现多继承；</p>
-</blockquote>
-<h3 id="（3）Java集合类：list，set，queue，map，stack的特点与使用"><a href="#（3）Java集合类：list，set，queue，map，stack的特点与使用" class="headerlink" title="（3）Java集合类：list，set，queue，map，stack的特点与使用"></a>（3）Java集合类：list，set，queue，map，stack的特点与使用</h3><blockquote>
-<p><strong>List类（单元素集合）：</strong>有序可重复，基于数组实现，可以在任意位置添加删除元素，用Iterator实现单向遍历，用ListIterator实现双向遍历</p>
-</blockquote>
-<blockquote>
-<p><strong>Set类（单元素集合）：</strong>无序不重复，基于双向链表实现，集合中只能包含一个null元素，用Iterator实现单向遍历，没有同步方法（线程不安全）</p>
-</blockquote>
-<blockquote>
-<p><strong>Queue类（队列）：</strong>遵循先进先出原则，使用offer（）来添加元素，使用poll（）来移除元素，不允许插入null元素</p>
-</blockquote>
-<blockquote>
-<p><strong>Map类（双元素集合）：</strong>存储键值对（key-value），key唯一不可重复，value可重复，可将key和value单独抽取出来，KeySet（）方法将key抽取为一个Set集合，Values（）方法见value抽取为一个Collection集合，entrySet（）方法将键值对抽取为一个Set集合，利用Iterator遍历输出</p>
-</blockquote>
-<blockquote>
-<p><strong>Stack类（栈）：</strong>遵循后进后出的原则，继承自Vector，允许将向量视为堆栈，提供了通常的 push 和 pop 操作，以及取堆栈顶点的 peek 方法、测试堆栈是否为空的 empty 方法、在堆栈中查找项并确定到堆栈顶距离的 search 方法</p>
-</blockquote>
-<p>使用：</p>
-<p>① 如果涉及堆栈，队列等操作，建议使用List</p>
-<p>② 对于快速插入和删除元素，建议使用LinkedList</p>
-<p>③ 需要快速随机访问元素，建议使用ArrayList</p>
-<h3 id="（4）ArrayList，Vector，LinkedList的存储性能和特性"><a href="#（4）ArrayList，Vector，LinkedList的存储性能和特性" class="headerlink" title="（4）ArrayList，Vector，LinkedList的存储性能和特性"></a>（4）ArrayList，Vector，LinkedList的存储性能和特性</h3><blockquote>
-<p>ArrayList和Vector都是基于数组实现的，他们都允许直接按照序号索引元素，但是插入元素涉及数组元素移动等内存操作，所以索引数据快而插入元素慢，而且Vector使用了synchronized方法（线程安全），所以效率比ArrayList差</p>
-<p>LinkedList是基于双向链表实现，按序号索引数据需要进行向前或后边遍历，但是插入数据是只需要记录本项的前后项即可，所以插入速度较快</p>
-</blockquote>
-<h3 id="（5）内存泄露和内存溢出"><a href="#（5）内存泄露和内存溢出" class="headerlink" title="（5）内存泄露和内存溢出"></a>（5）内存泄露和内存溢出</h3><blockquote>
-<p><strong>内存泄露：</strong>应用程序在申请内存后，无法释放已经申请的内存空间，一次内存泄露可以忽略，但是任其发展最终会导致内存溢出。例如IO流读取数据后，要及时关闭流以及对数据库连接的释放（try-with-resource语法可以自动关闭）</p>
-</blockquote>
-<blockquote>
-<p><strong>内存溢出：</strong>应用程序在申请内存时，没有足够的内存空间供其使用。例如在项目中对于大批量数据的导入，采用分批量提交的方式。</p>
-</blockquote>
-<h3 id="（6）反射中，Class-forName-和ClassLoader-loadClass-的区别"><a href="#（6）反射中，Class-forName-和ClassLoader-loadClass-的区别" class="headerlink" title="（6）反射中，Class.forName()和ClassLoader.loadClass()的区别"></a>（6）反射中，Class.forName()和ClassLoader.loadClass()的区别</h3><blockquote>
-<p><strong>Class.forName()方法：</strong>实际调用的是Class.forName(className,true,classloader)；第二个boolean参数表示类是否需要初始化，一旦初始化，就会触发目标对象的static代码块执行，static变量也会被再次初始化</p>
-</blockquote>
-<blockquote>
-<p><strong>ClassLoader.loadClass()方法：</strong>实际调用的方法是ClassLoader.loadClass(className,false)，第二个boolean参数，表示目标对象是否进行链接，false表示不进行链接，不进行包括初始化等一系列操作（静态块和静态对象也不会得到执行）</p>
-</blockquote>
-<h3 id="（7）Int和Integer的区别"><a href="#（7）Int和Integer的区别" class="headerlink" title="（7）Int和Integer的区别"></a>（7）Int和Integer的区别</h3><blockquote>
-<p>Integer是Int的包装类，在拆箱和装箱中，二者互相转换；</p>
-<p>Int是基本类型直接存储数值，integer是引用数据类型存储地址值</p>
-</blockquote>
-<h3 id="（8）String，StringBuilder，StringBuffer区别"><a href="#（8）String，StringBuilder，StringBuffer区别" class="headerlink" title="（8）String，StringBuilder，StringBuffer区别"></a>（8）String，StringBuilder，StringBuffer区别</h3><table>
-<thead>
-<tr>
-<th><strong>String</strong></th>
-<th><strong>字符串常量</strong></th>
-<th><strong>不可变</strong></th>
-<th><strong>使用字符串拼接时是两个不同的2个空间</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>StringBuilder</strong></td>
-<td><strong>字符串常量</strong></td>
-<td><strong>可变</strong></td>
-<td><strong>线程不安全，字符串拼接直接在字符串后追加</strong></td>
-</tr>
-<tr>
-<td><strong>StringBuffer</strong></td>
-<td><strong>字符串常量</strong></td>
-<td><strong>可变</strong></td>
-<td><strong>线程安全，字符串拼接直接在字符串后追加</strong></td>
-</tr>
-</tbody></table>
-<p>① StringBuilder执行效率高于StringBuffer和String</p>
-<p>② String是一个常量，不可变，进行每一次拼接都会创建一个新的对象，会产生许多的临时对象，导致GC（垃圾回收机制）开始工作，影响系统性能；StringBuilder和StringBuffer的是可变，当进行字符串拼接时采用append方法，在原来的基础上进行追加，所以比String性能高，又因为StringBuffer是线程安全，StringBuilder是线程不安全，所以StringBuilder比StringBuffer性能高，但是默认使用StringBuffer</p>
-<p>③ 对于大数据量的字符串的拼接，使用StringBuffer和StringBuilder</p>
-<h3 id="（9）Hashtable和Hashmap的区别"><a href="#（9）Hashtable和Hashmap的区别" class="headerlink" title="（9）Hashtable和Hashmap的区别"></a>（9）Hashtable和Hashmap的区别</h3><blockquote>
-<p>Hashtable线程安全，HashMap线程不安全</p>
-<p>Hashtable不允许NUll值（key和value都不可以），HashMap可以允许NUll值（key和value都可以）</p>
-<p>两者的遍历大同小异，Hashtable仅仅比HashMap多一个elements方法（遍历输出value值）</p>
-</blockquote>
-<h3 id="（10）常见的编译时异常"><a href="#（10）常见的编译时异常" class="headerlink" title="（10）常见的编译时异常"></a>（10）常见的编译时异常</h3><blockquote>
-<p>SQLException：数据库访问错误或者其他错误消息的异常</p>
-<p>IOException：由失败或中断的I&#x2F;O操作产生的异常</p>
-<p>FileNotFoundException:  打开指定路径名表示的文件失败时，抛出的异常</p>
-<p>ClassNotFoundException:  找不到具有指定名称的类的定义抛出的异常</p>
-<p>EOFException:  当输入过程中意外到达文件或流的末尾时，抛出的异常</p>
-</blockquote>
-<h3 id="（11）方法重载和方法重写的区别"><a href="#（11）方法重载和方法重写的区别" class="headerlink" title="（11）方法重载和方法重写的区别"></a>（11）方法重载和方法重写的区别</h3><blockquote>
-<p><strong>方法重载：</strong>方法名一致，参数列表中参数的顺序，类型，个数不同；重载与方法的返回值类型无关；存在同一个类中，可以抛出不同的异常，可以有不同修饰符</p>
-</blockquote>
-<blockquote>
-<p><strong>方法重写：</strong>参数列表，方法名，返回值类型必须完全一致，构造方法不能被重写；声明为final的方法不能被重写；声明为static的方法不存在重写；访问权限不能比父类低；重写之后的方法不能抛出更大的异常；发生在父类和子类中</p>
-</blockquote>
-<h3 id="（12）throw和throws的区别"><a href="#（12）throw和throws的区别" class="headerlink" title="（12）throw和throws的区别"></a>（12）throw和throws的区别</h3><blockquote>
-<p><strong>throw：</strong>用于方法体中，表示抛出异常，由方法体内的语句处理；throw是具体向外抛出异常的动作，抛出的是一个异常实例，执行throw是一定抛出了某种异常</p>
-</blockquote>
-<blockquote>
-<p><strong>throws：</strong>用于方法声明后面，表示可能抛出异常，由该方法的调用者去处理异常（简称向上“抛”）；throws主要是声明这个方法可能会抛出某种类型的异常，让调用者知道需要捕捉的异常类型；throws表示的是一种可能，但是不一定会发生的异常</p>
-</blockquote>
-<h3 id="（13）权限修饰符的区别"><a href="#（13）权限修饰符的区别" class="headerlink" title="（13）权限修饰符的区别"></a>（13）权限修饰符的区别</h3><table>
-<thead>
-<tr>
-<th></th>
-<th>同一个类</th>
-<th>同一个包</th>
-<th>不同包的子类</th>
-<th>不同包的非子类</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>public（共有的）</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-</tr>
-<tr>
-<td>protected（受保护的）</td>
-<td>√</td>
-<td>√</td>
-<td>√</td>
-<td></td>
-</tr>
-<tr>
-<td>default（默认的）</td>
-<td>√</td>
-<td>√</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>private（私有的）</td>
-<td>√</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<h3 id="（14）为什么重写equals方法时必须重写hashCode方法？"><a href="#（14）为什么重写equals方法时必须重写hashCode方法？" class="headerlink" title="（14）为什么重写equals方法时必须重写hashCode方法？"></a>（14）为什么重写equals方法时必须重写hashCode方法？</h3><blockquote>
-<p>hashCode（）的作用是获取哈希码，也称为散列码，返回的是一个int整数；哈希码的作用是确定该对象在哈希表中的索引位置。</p>
-<p>根据源码中的注释中得知：当重写equals方法后有必要将hashCode方法重写，这样做才能保证不违背hashCode方法中“相同对象必须要有相同哈希值”的约定</p>
-<p>那么hashCode方法约定又是什么呢？</p>
-<p>总结为三大点：</p>
-<p>① 如果对象在使用equals方法中比较的参数没有修改，那么多次调用一个对象的hashCode方法放回的哈希值是相同的</p>
-<p>② 如果两个对象通过equals方法比较是相等的，那么要求这两个对象的hashCode返回的哈希值也应该相同的</p>
-<p>③ 如果两个对象通equals方法比较是不同的，那么也不要求这两个对象的hashCode方法返回的值是不相同的（但是我们应该知道对于不同对象产生不同的哈希值对于哈希表能够提高性能的）</p>
-</blockquote>
-<p>借鉴：[Java面试题：重写了equals，还要重写hashCode？ | w3c笔记 (w3cschool.cn)](<a href="https://www.w3cschool.cn/article/4adce89bf8b821.html#:~:text=%E5%A4%A7%E8%87%B4%E6%84%8F%E6%80%9D%E6%98%AF%EF%BC%9A%E5%BD%93%E9%87%8D%E5%86%99">https://www.w3cschool.cn/article/4adce89bf8b821.html#:~:text=大致意思是：当重写</a> equals 方法后有必要将 hashCode 方法也重写，这样做才能保证不违背 hashCode,方法中”相同对象必须有相同哈希值”的约定。 此处只是提醒了我们重写 hashCode 方法的必要性，那其中提到的 hashCode 方法设计约定又是什么呢？)</p>
-<h3 id="（15）HashSet和TreeSet有什么区别？"><a href="#（15）HashSet和TreeSet有什么区别？" class="headerlink" title="（15）HashSet和TreeSet有什么区别？"></a>（15）HashSet和TreeSet有什么区别？</h3><blockquote>
-<p>HashSet: 由一个hash表实现，它的元素是无序的，add(),remove(),contains()方法的时间复杂度为O(1)</p>
-<p>TreeSet：由一个树形的结构来实现的，它里面的元素是有序的，add(),remove(),contains()方法的时间复杂度是O(logn)</p>
-</blockquote>
-<h3 id="（16）强引用，弱引用，软引用，虚引用的区别"><a href="#（16）强引用，弱引用，软引用，虚引用的区别" class="headerlink" title="（16）强引用，弱引用，软引用，虚引用的区别"></a>（16）强引用，弱引用，软引用，虚引用的区别</h3><blockquote>
-<p><strong>强引用（StrongReference）：</strong>最普遍的一种引用方式，例如String s &#x3D; “abc”，变量s就是字符串“abc”的强引用，只要强引用存在，则垃圾回收器就不会回收这个对象。</p>
-<p><strong>软引用（SoftReference）：</strong>用于描述还要用非必须的对象，如果内存足够，不回收，如果内存不足时，则回收。一般用于双向内存敏感的<strong>高速缓存</strong>，软引用可以和队列ReferenceQueue联合使用，如果软引用的对象被垃圾回收，JVM就会把这个软引用加入到与之关联的引用队列中</p>
-<p><strong>弱引用（WeakReference）</strong>：弱引用与软引用大致相同，弱引用与软引用的区别：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现只具有弱引用的对象，不管当前内存是否足够，都会回收它的内存</p>
-<p><strong>虚引用（PhantomReference）：</strong>就是形同虚设，与其他几种引用都不同，虚引用并不会决定对象的生命周期。如果一个对象只有虚引用，那么它和没有任何引用一样，在任何时候都可能被垃圾回收器回收。虚引用只要用来跟踪对象被垃圾回收器回收的活动。</p>
-<p>虚引用与弱引用和软引用的一个区别：虚引用必须与引用队列（ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引，就会在回收对象的内存之前，把这个虚引用加入到与之关联的引用队列中。</p>
-</blockquote>
-<p>详情：<a href="https://cloud.tencent.com/developer/article/1408097">Java 的强引用、弱引用、软引用、虚引用 - 腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
-<h3 id="（17）new一个对象的过程和clone一个对象的过程"><a href="#（17）new一个对象的过程和clone一个对象的过程" class="headerlink" title="（17）new一个对象的过程和clone一个对象的过程"></a>（17）new一个对象的过程和clone一个对象的过程</h3><blockquote>
-<p>new一个对象：当程序执行到new操作符时，会先去确定new 的对象类型，因为知道了数据类型，才能知道要分配多大的内存空间。分配完内存，再调用构造函数，填充对象的各个域，这是对象的初始化，构造函数放回后，对象创建完成，将它的引用地址发布到外部，就可以通过这个引用来操作这个对象</p>
-<p>clone一个对象：调用clone方法时，先分配内存，与原对象的内存空间相同，再使用原对象中对应的各个域，填充新对象的各个域，完成后，clone方法返回，一个新的相同的对象被创建好，将引用发布到外部 </p>
-</blockquote>
-<h3 id="（18）Java中-x3D-x3D-和equals的区别"><a href="#（18）Java中-x3D-x3D-和equals的区别" class="headerlink" title="（18）Java中&#x3D;&#x3D;和equals的区别"></a>（18）Java中&#x3D;&#x3D;和equals的区别</h3><blockquote>
-<p>&#x3D;&#x3D; 是判断两个变量或实例是不是指向同一个内存空间；equals是判断两个变量或者实例所指向的内存空间内的值是否相同</p>
-</blockquote>
-<h3 id="（19）final，finalize和finally的区别"><a href="#（19）final，finalize和finally的区别" class="headerlink" title="（19）final，finalize和finally的区别"></a>（19）final，finalize和finally的区别</h3><blockquote>
-<p>final：用于声明属性，方法和类，分别表示属性不可变，方法不可被覆盖，类不可被继承</p>
-<p>finally：为异常处理语句结构的一部分，表示总是执行</p>
-<p>finalize：为object类中的一个方法，在垃圾回收器执行的时候会调用该对象的此方法，可以覆盖此方法提供方法垃圾收集时的其他资源回收，例如关闭文件。finalize（）方法是在垃圾收集器删除对象之前对这个对象调用的。</p>
-</blockquote>
-<h3 id="（20）Java创建对象的几种方式"><a href="#（20）Java创建对象的几种方式" class="headerlink" title="（20）Java创建对象的几种方式"></a>（20）Java创建对象的几种方式</h3><blockquote>
-<p>new 创建新对象</p>
-<p>通过反射机制</p>
-<p>采用clone机制（实现Cloneable接口）</p>
-<p>通过序列化机制（实现Serializable接口）</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyTest</span>()&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">// new</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>();</span><br><span class="line">        <span class="comment">// 反射</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> String.class;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> (String) clazz.newInstance();</span><br><span class="line">        <span class="comment">// 使用clone方法</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> (String)s2.clone();</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>序列化机制参考：<a href="https://blog.csdn.net/qq_19782019/article/details/80422143">(38条消息) Java基础——对象的序列化（通俗易懂，排版优美）_刘扬俊的博客-CSDN博客</a></p>
-<h3 id="（21）-amp-和-amp-amp-的区别"><a href="#（21）-amp-和-amp-amp-的区别" class="headerlink" title="（21）&amp;和&amp;&amp;的区别"></a>（21）&amp;和&amp;&amp;的区别</h3><blockquote>
-<p>相同点：最终得到的boolean值结果一样</p>
-<p>不同点：&amp;既是逻辑运算符也是位运算,&amp;&amp;只是逻辑运算符；&amp;不具有短路效果，即左边false，右边也会执行，&amp;&amp;具有短路效果，左边为false，右边不会执行</p>
-</blockquote>
-<h3 id="（22）内部类有什么作用？"><a href="#（22）内部类有什么作用？" class="headerlink" title="（22）内部类有什么作用？"></a>（22）内部类有什么作用？</h3><blockquote>
-<p>1、内部类可以很好的实现隐藏，一般的非内部类，是不允许有private，protected权限的，但内部类可以</p>
-<p>2、内部类拥有外围类的所有元素的访问权限（内部类是外部类的一部分）</p>
-<p>3、可以间接实现多继承</p>
-<p>4、可以避免修改接口而实现同一个类中两种同名方法的调用</p>
-</blockquote>
-<p>借鉴：<a href="https://blog.csdn.net/u013728021/article/details/87358517">(38条消息) java内部类的四大作用_奋斗的bigHead的博客-CSDN博客</a></p>
-<h3 id="（23）深拷贝和浅拷贝的区别是什么？"><a href="#（23）深拷贝和浅拷贝的区别是什么？" class="headerlink" title="（23）深拷贝和浅拷贝的区别是什么？"></a>（23）深拷贝和浅拷贝的区别是什么？</h3><blockquote>
-<p><strong>浅拷贝：</strong>被复制对象的所有变量都含有与原来的对象相同的对象，而所有的对其他对象的引用仍然指向原来的对象。简而言之，浅拷贝仅仅复制考虑的对象，不能复制它引用的对象。</p>
-<p><strong>深拷贝：</strong>被复制对象的所有变量都含有与原来的对象相同的值，且原对象那些引用其他对象的变量将指向被复制过的新对象，而不是原有的那些被引用的对象。简而言之，深拷贝把复制的对象所引用的对象都复制了一遍。</p>
-</blockquote>
-<h3 id="（24）static的用法"><a href="#（24）static的用法" class="headerlink" title="（24）static的用法"></a>（24）static的用法</h3><blockquote>
-<p>Static可以修饰内部类、方法、变量、代码块</p>
-<p>Static修饰的类为静态内部类</p>
-<p>Static修饰的方法为静态方法，表示该方法属于当前类，类的所有对象共有；静态方法不能被重写；可以直接用类名点的形式调用；静态方法内不能使用this和super关键字</p>
-<p>Static修饰的变量为静态变量，静态变量被所有实例共享，不依赖于某个对象；静态变量在内存只有一份拷贝，在JVM加载类的时候，只为静态分配一次内存</p>
-<p>Static修饰的代码块为静态代码块，被用于程序优化；静态代码块中的代码在整个类加载的时候只会执行一次；静态代码块可以有多个，如果有多个，按照先后顺序依次执行</p>
-</blockquote>
-<h3 id="（25）什么是值传递和引用传递"><a href="#（25）什么是值传递和引用传递" class="headerlink" title="（25）什么是值传递和引用传递"></a>（25）什么是值传递和引用传递</h3><blockquote>
-<p><strong>值传递：</strong>在调用方法时将实际参数复制一份传递到方法中，在方法中对参数进行修改，不会影响到实际参数</p>
-<p><strong>引用传递：</strong>在调用方法时将实际参数的地址直接传递在方法内，在方法内对参数进行的修改，将会影响到实际参数</p>
-<p><strong>本质上的区别：</strong>实际参数是复制一份还是直接被拿去使用</p>
-</blockquote>
-<p>详细：<a href="https://blog.csdn.net/u013728021/article/details/87358517">(38条消息) java内部类的四大作用_奋斗的bigHead的博客-CSDN博客</a></p>
-<h3 id="（26）成员变量与局部变量的区别有哪些？"><a href="#（26）成员变量与局部变量的区别有哪些？" class="headerlink" title="（26）成员变量与局部变量的区别有哪些？"></a>（26）成员变量与局部变量的区别有哪些？</h3><blockquote>
-<p>1、从语法形式上，成员变量属于类，局部变量是在方法内定义的变量或者是方法的参数；成员变量可以被public，private，protected等修饰符修饰，而局部变量不能被权限修饰符和static所修饰（两者都能被final修饰）</p>
-<p>2、从变量的内存存储位置看，成员变量属于对象的一部分，对象存在于堆内存；局部变量存在与栈内存</p>
-<p>3、从变量在内存中的生存时间上看，成员变量随着对象的创建而存在；局部变量随着方法的调用而自动消失</p>
-<p>4、成员变量如果没有被赋初值，则会自动以类型的默认值而赋值（当被final和static修饰时（常量），一定要赋值）；局部变量没有被赋初值时，则不会被自动赋值</p>
-</blockquote>
-<h3 id="（27）静态方法和实例方法有何不同？"><a href="#（27）静态方法和实例方法有何不同？" class="headerlink" title="（27）静态方法和实例方法有何不同？"></a>（27）静态方法和实例方法有何不同？</h3><blockquote>
-<p>1、在外部调用静态方法时，可以用类名点的形式调用，也可以使用对象名点的形式调用，而调用实例方法只能是后者调用；调用静态方法无需创建对象，调用实例方法一定要创建对象</p>
-<p>2、静态方法只能访问本类的静态成员（即静态成员变量和静态方法）。而实例方法没有限制</p>
-</blockquote>
-<h3 id="（28）多态是什么？"><a href="#（28）多态是什么？" class="headerlink" title="（28）多态是什么？"></a>（28）多态是什么？</h3><blockquote>
-<p>多态是同一行为具有不同表现形式或形态的能力，即对象多种表现形式的体现，就是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量到底会指向哪个类，即一个引用变量到底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。</p>
-</blockquote>
-<h3 id="（29）多态存在的三个必要条件"><a href="#（29）多态存在的三个必要条件" class="headerlink" title="（29）多态存在的三个必要条件"></a>（29）多态存在的三个必要条件</h3><blockquote>
-<p>1、一定要有继承</p>
-<p>2、要有方法的重写</p>
-<p>3、父类引用指向子类对象（父类类型 变量名 &#x3D; new 子类构造器）</p>
-</blockquote>
-<h3 id="（30）TreeMap，HashMap，LinkedHashMap的区别"><a href="#（30）TreeMap，HashMap，LinkedHashMap的区别" class="headerlink" title="（30）TreeMap，HashMap，LinkedHashMap的区别"></a>（30）TreeMap，HashMap，LinkedHashMap的区别</h3><blockquote>
-<p>TreeMap：存储有序，默认时按key的升序排序，也可以指定比较器；当使用迭代器（Iterator）遍历时，得到的结果时排过序的</p>
-<p>HashMap：存储无序，具有很快的访问速度；只允许一条元素的key为null，value没有限制；不支持线程的同步</p>
-<p>LinkedHashMap：存储有序</p>
-</blockquote>
-<p>详细：<a href="https://www.cnblogs.com/acm-bingzi/p/javaMap.html">HashMap,LinkedHashMap,TreeMap的区别（转） - 贾树丙 - 博客园 (cnblogs.com)</a></p>
-<h3 id="（31）什么是反射"><a href="#（31）什么是反射" class="headerlink" title="（31）什么是反射"></a>（31）什么是反射</h3><blockquote>
-<p>在运行时，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法，这种动态获取信息以及动态调用对象的功能称为Java反射机制</p>
-<p>反射就是动态加载对象，并对对象进行剖析。</p>
-</blockquote>
-<h3 id="（32）反射的作用"><a href="#（32）反射的作用" class="headerlink" title="（32）反射的作用"></a>（32）反射的作用</h3><blockquote>
-<p>1、在运行时判断任意一个对象所属的类型</p>
-<p>2、在运行时构造任意一个类的对象</p>
-<p>3、在运行时判断任意一个类所具备的成员变量和方法</p>
-<p>4、在运行时调用任意一个对象的方法</p>
-</blockquote>
-<h3 id="（33）break和continue的区别"><a href="#（33）break和continue的区别" class="headerlink" title="（33）break和continue的区别"></a>（33）break和continue的区别</h3><blockquote>
-<p>两者都是用来控制循环的语句</p>
-<p>break用来完全结束一个循环语句，跳出循环体执行后面的语句</p>
-<p>continue是跳过本次循环，直接进行下次循环</p>
-</blockquote>
-<h3 id="（34）运行时异常与一般异常有何异同"><a href="#（34）运行时异常与一般异常有何异同" class="headerlink" title="（34）运行时异常与一般异常有何异同"></a>（34）运行时异常与一般异常有何异同</h3><blockquote>
-<p>异常表示程序运行过程中可能出现的非正常状态，运行时异常表示虚拟机的通常操作中可能遇到的异常，是一种常见运行错误。</p>
-<p>Java编译器要求方法必须声明抛出可能发生的非运行时异常，但是并不要求必须声明抛出未被捕获的运行时异常。</p>
-</blockquote>
-<h3 id="（35）Collection和Collections的区别"><a href="#（35）Collection和Collections的区别" class="headerlink" title="（35）Collection和Collections的区别"></a>（35）Collection和Collections的区别</h3><blockquote>
-<p>Collection时集合类的上级接口。继承它的接口主要有Set和List</p>
-<p>Collections是针对集合类的一个工具类（帮助类），提供了一系列静态方法实现对各种集合的搜索，排序，线程安全化等操作。简化了对集合的操作</p>
-</blockquote>
-<h3 id="（36）Error和Exception有什么区别"><a href="#（36）Error和Exception有什么区别" class="headerlink" title="（36）Error和Exception有什么区别"></a>（36）Error和Exception有什么区别</h3><blockquote>
-<p>Error：是系统中的错误，程序员是不能改变的和处理的，是在程序编译时出现的错误，只能通过修改程序才能修正。一般是指与虚拟机相关的问题，如系统崩溃，虚拟机错误，内存空间不足，方法调用栈溢等。对于这类错误的导致的应用程序中断，仅靠程序本身无法恢复和和预防，遇到这样的错误，建议让程序终止。</p>
-<p>Exception：表示程序可以处理的异常，可以捕获且可能恢复。遇到这类异常，应该尽可能处理异常，使程序恢复运行，而不应该随意终止异常。</p>
-</blockquote>
-<p>详细：<a href="https://blog.csdn.net/weixin_43698561/article/details/104382643">(38条消息) 面试题整理:Error与Exception的区别_exception与error区别_Jxfor。的博客-CSDN博客</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1080,6 +810,276 @@
 <p><strong>安全性和资源消耗</strong>：HTTP协议运行在TCP之上，传输的内容都是明文，客户端和服务器之间都不能验证对方的身份。HTTPS是运行在SSL&#x2F;TLS之上的HTTP协议，SSL&#x2F;TLS是运行在TCP之上的，所有传输的内容都是密文，加密使用对称加密，但对称加密的密钥是用服务器方的证书进行非对称加密。所以说，HTTP安全性没有HTTPS高，但是HTTPS比HTTP消耗更多的资源。</p>
 <p><strong>SEO（搜索引擎优化）</strong>：搜索引擎更青睐使用HTTPS协议的网站，因为HTTPS能够提供更高的安全性和用户隐私保护。使用HTTPS协议的网站在搜索结果中可能会被优先显示，从而对SEO产生影响。</p>
 </blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>八股文</title>
+    <url>/2023/03/18/Java%E5%85%AB%E8%82%A1%E6%96%87/</url>
+    <content><![CDATA[<h1 id="Java八股文"><a href="#Java八股文" class="headerlink" title="Java八股文"></a>Java八股文</h1><h2 id="参考网站："><a href="#参考网站：" class="headerlink" title="参考网站："></a>参考网站：</h2><p>基础知识：<a href="https://github.com/wolverinn/Waking-Up">https://github.com/wolverinn/Waking-Up</a></p>
+<h2 id="一、Java基础"><a href="#一、Java基础" class="headerlink" title="一、Java基础"></a>一、Java基础</h2><h3 id="（1）final关键字的作用？"><a href="#（1）final关键字的作用？" class="headerlink" title="（1）final关键字的作用？"></a>（1）final关键字的作用？</h3><blockquote>
+<p>被final修饰的类不可被继承（断子绝孙）</p>
+<p>被final修饰的方法不能被重写，JVM会尝试将其内联，提高运行效率（内联函数，详情见：<a href="https://blog.csdn.net/ke_weiquan/article/details/51946174">(38条消息) JVM 方法内联_柯柯为为的博客-CSDN博客</a>）</p>
+<p>被final修饰的变量不能被改变</p>
+<p>修饰引用，表示引用不可变，指向的内容可变（例如：单例模式）</p>
+<p>修饰常量，在编译阶段会存入常量池中</p>
+</blockquote>
+<h3 id="（2）抽象类（abstract）和接口（interface）有什么区别？"><a href="#（2）抽象类（abstract）和接口（interface）有什么区别？" class="headerlink" title="（2）抽象类（abstract）和接口（interface）有什么区别？"></a>（2）抽象类（abstract）和接口（interface）有什么区别？</h3><blockquote>
+<p><strong>抽象类：</strong>声明方法的存在而不实现；用于创建一个表明某些基本行为的类，并为该类声明方法，但是不实现方法；抽象类不能对象实例化，需要一个子类去继承实现抽象类，子类如果没有实现父类的全部抽象方法，仍未抽象类；不能有抽象构造方法和抽象静态方法</p>
+<p><strong>意义：</strong>为其他子类提供一个公共的类型；封装子类中重复定义的内容；定义抽象方法，子类虽然不同的实现，但是定义时是一致的</p>
+</blockquote>
+<blockquote>
+<p><strong>接口：</strong>只有抽象方法和静态变量；接口可以实现多继承；</p>
+</blockquote>
+<h3 id="（3）Java集合类：list，set，queue，map，stack的特点与使用"><a href="#（3）Java集合类：list，set，queue，map，stack的特点与使用" class="headerlink" title="（3）Java集合类：list，set，queue，map，stack的特点与使用"></a>（3）Java集合类：list，set，queue，map，stack的特点与使用</h3><blockquote>
+<p><strong>List类（单元素集合）：</strong>有序可重复，基于数组实现，可以在任意位置添加删除元素，用Iterator实现单向遍历，用ListIterator实现双向遍历</p>
+</blockquote>
+<blockquote>
+<p><strong>Set类（单元素集合）：</strong>无序不重复，基于双向链表实现，集合中只能包含一个null元素，用Iterator实现单向遍历，没有同步方法（线程不安全）</p>
+</blockquote>
+<blockquote>
+<p><strong>Queue类（队列）：</strong>遵循先进先出原则，使用offer（）来添加元素，使用poll（）来移除元素，不允许插入null元素</p>
+</blockquote>
+<blockquote>
+<p><strong>Map类（双元素集合）：</strong>存储键值对（key-value），key唯一不可重复，value可重复，可将key和value单独抽取出来，KeySet（）方法将key抽取为一个Set集合，Values（）方法见value抽取为一个Collection集合，entrySet（）方法将键值对抽取为一个Set集合，利用Iterator遍历输出</p>
+</blockquote>
+<blockquote>
+<p><strong>Stack类（栈）：</strong>遵循后进后出的原则，继承自Vector，允许将向量视为堆栈，提供了通常的 push 和 pop 操作，以及取堆栈顶点的 peek 方法、测试堆栈是否为空的 empty 方法、在堆栈中查找项并确定到堆栈顶距离的 search 方法</p>
+</blockquote>
+<p>使用：</p>
+<p>① 如果涉及堆栈，队列等操作，建议使用List</p>
+<p>② 对于快速插入和删除元素，建议使用LinkedList</p>
+<p>③ 需要快速随机访问元素，建议使用ArrayList</p>
+<h3 id="（4）ArrayList，Vector，LinkedList的存储性能和特性"><a href="#（4）ArrayList，Vector，LinkedList的存储性能和特性" class="headerlink" title="（4）ArrayList，Vector，LinkedList的存储性能和特性"></a>（4）ArrayList，Vector，LinkedList的存储性能和特性</h3><blockquote>
+<p>ArrayList和Vector都是基于数组实现的，他们都允许直接按照序号索引元素，但是插入元素涉及数组元素移动等内存操作，所以索引数据快而插入元素慢，而且Vector使用了synchronized方法（线程安全），所以效率比ArrayList差</p>
+<p>LinkedList是基于双向链表实现，按序号索引数据需要进行向前或后边遍历，但是插入数据是只需要记录本项的前后项即可，所以插入速度较快</p>
+</blockquote>
+<h3 id="（5）内存泄露和内存溢出"><a href="#（5）内存泄露和内存溢出" class="headerlink" title="（5）内存泄露和内存溢出"></a>（5）内存泄露和内存溢出</h3><blockquote>
+<p><strong>内存泄露：</strong>应用程序在申请内存后，无法释放已经申请的内存空间，一次内存泄露可以忽略，但是任其发展最终会导致内存溢出。例如IO流读取数据后，要及时关闭流以及对数据库连接的释放（try-with-resource语法可以自动关闭）</p>
+</blockquote>
+<blockquote>
+<p><strong>内存溢出：</strong>应用程序在申请内存时，没有足够的内存空间供其使用。例如在项目中对于大批量数据的导入，采用分批量提交的方式。</p>
+</blockquote>
+<h3 id="（6）反射中，Class-forName-和ClassLoader-loadClass-的区别"><a href="#（6）反射中，Class-forName-和ClassLoader-loadClass-的区别" class="headerlink" title="（6）反射中，Class.forName()和ClassLoader.loadClass()的区别"></a>（6）反射中，Class.forName()和ClassLoader.loadClass()的区别</h3><blockquote>
+<p><strong>Class.forName()方法：</strong>实际调用的是Class.forName(className,true,classloader)；第二个boolean参数表示类是否需要初始化，一旦初始化，就会触发目标对象的static代码块执行，static变量也会被再次初始化</p>
+</blockquote>
+<blockquote>
+<p><strong>ClassLoader.loadClass()方法：</strong>实际调用的方法是ClassLoader.loadClass(className,false)，第二个boolean参数，表示目标对象是否进行链接，false表示不进行链接，不进行包括初始化等一系列操作（静态块和静态对象也不会得到执行）</p>
+</blockquote>
+<h3 id="（7）Int和Integer的区别"><a href="#（7）Int和Integer的区别" class="headerlink" title="（7）Int和Integer的区别"></a>（7）Int和Integer的区别</h3><blockquote>
+<p>Integer是Int的包装类，在拆箱和装箱中，二者互相转换；</p>
+<p>Int是基本类型直接存储数值，integer是引用数据类型存储地址值</p>
+</blockquote>
+<h3 id="（8）String，StringBuilder，StringBuffer区别"><a href="#（8）String，StringBuilder，StringBuffer区别" class="headerlink" title="（8）String，StringBuilder，StringBuffer区别"></a>（8）String，StringBuilder，StringBuffer区别</h3><table>
+<thead>
+<tr>
+<th><strong>String</strong></th>
+<th><strong>字符串常量</strong></th>
+<th><strong>不可变</strong></th>
+<th><strong>使用字符串拼接时是两个不同的2个空间</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>StringBuilder</strong></td>
+<td><strong>字符串常量</strong></td>
+<td><strong>可变</strong></td>
+<td><strong>线程不安全，字符串拼接直接在字符串后追加</strong></td>
+</tr>
+<tr>
+<td><strong>StringBuffer</strong></td>
+<td><strong>字符串常量</strong></td>
+<td><strong>可变</strong></td>
+<td><strong>线程安全，字符串拼接直接在字符串后追加</strong></td>
+</tr>
+</tbody></table>
+<p>① StringBuilder执行效率高于StringBuffer和String</p>
+<p>② String是一个常量，不可变，进行每一次拼接都会创建一个新的对象，会产生许多的临时对象，导致GC（垃圾回收机制）开始工作，影响系统性能；StringBuilder和StringBuffer的是可变，当进行字符串拼接时采用append方法，在原来的基础上进行追加，所以比String性能高，又因为StringBuffer是线程安全，StringBuilder是线程不安全，所以StringBuilder比StringBuffer性能高，但是默认使用StringBuffer</p>
+<p>③ 对于大数据量的字符串的拼接，使用StringBuffer和StringBuilder</p>
+<h3 id="（9）Hashtable和Hashmap的区别"><a href="#（9）Hashtable和Hashmap的区别" class="headerlink" title="（9）Hashtable和Hashmap的区别"></a>（9）Hashtable和Hashmap的区别</h3><blockquote>
+<p>Hashtable线程安全，HashMap线程不安全</p>
+<p>Hashtable不允许NUll值（key和value都不可以），HashMap可以允许NUll值（key和value都可以）</p>
+<p>两者的遍历大同小异，Hashtable仅仅比HashMap多一个elements方法（遍历输出value值）</p>
+</blockquote>
+<h3 id="（10）常见的编译时异常"><a href="#（10）常见的编译时异常" class="headerlink" title="（10）常见的编译时异常"></a>（10）常见的编译时异常</h3><blockquote>
+<p>SQLException：数据库访问错误或者其他错误消息的异常</p>
+<p>IOException：由失败或中断的I&#x2F;O操作产生的异常</p>
+<p>FileNotFoundException:  打开指定路径名表示的文件失败时，抛出的异常</p>
+<p>ClassNotFoundException:  找不到具有指定名称的类的定义抛出的异常</p>
+<p>EOFException:  当输入过程中意外到达文件或流的末尾时，抛出的异常</p>
+</blockquote>
+<h3 id="（11）方法重载和方法重写的区别"><a href="#（11）方法重载和方法重写的区别" class="headerlink" title="（11）方法重载和方法重写的区别"></a>（11）方法重载和方法重写的区别</h3><blockquote>
+<p><strong>方法重载：</strong>方法名一致，参数列表中参数的顺序，类型，个数不同；重载与方法的返回值类型无关；存在同一个类中，可以抛出不同的异常，可以有不同修饰符</p>
+</blockquote>
+<blockquote>
+<p><strong>方法重写：</strong>参数列表，方法名，返回值类型必须完全一致，构造方法不能被重写；声明为final的方法不能被重写；声明为static的方法不存在重写；访问权限不能比父类低；重写之后的方法不能抛出更大的异常；发生在父类和子类中</p>
+</blockquote>
+<h3 id="（12）throw和throws的区别"><a href="#（12）throw和throws的区别" class="headerlink" title="（12）throw和throws的区别"></a>（12）throw和throws的区别</h3><blockquote>
+<p><strong>throw：</strong>用于方法体中，表示抛出异常，由方法体内的语句处理；throw是具体向外抛出异常的动作，抛出的是一个异常实例，执行throw是一定抛出了某种异常</p>
+</blockquote>
+<blockquote>
+<p><strong>throws：</strong>用于方法声明后面，表示可能抛出异常，由该方法的调用者去处理异常（简称向上“抛”）；throws主要是声明这个方法可能会抛出某种类型的异常，让调用者知道需要捕捉的异常类型；throws表示的是一种可能，但是不一定会发生的异常</p>
+</blockquote>
+<h3 id="（13）权限修饰符的区别"><a href="#（13）权限修饰符的区别" class="headerlink" title="（13）权限修饰符的区别"></a>（13）权限修饰符的区别</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>同一个类</th>
+<th>同一个包</th>
+<th>不同包的子类</th>
+<th>不同包的非子类</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>public（共有的）</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>protected（受保护的）</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td></td>
+</tr>
+<tr>
+<td>default（默认的）</td>
+<td>√</td>
+<td>√</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>private（私有的）</td>
+<td>√</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="（14）为什么重写equals方法时必须重写hashCode方法？"><a href="#（14）为什么重写equals方法时必须重写hashCode方法？" class="headerlink" title="（14）为什么重写equals方法时必须重写hashCode方法？"></a>（14）为什么重写equals方法时必须重写hashCode方法？</h3><blockquote>
+<p>hashCode（）的作用是获取哈希码，也称为散列码，返回的是一个int整数；哈希码的作用是确定该对象在哈希表中的索引位置。</p>
+<p>根据源码中的注释中得知：当重写equals方法后有必要将hashCode方法重写，这样做才能保证不违背hashCode方法中“相同对象必须要有相同哈希值”的约定</p>
+<p>那么hashCode方法约定又是什么呢？</p>
+<p>总结为三大点：</p>
+<p>① 如果对象在使用equals方法中比较的参数没有修改，那么多次调用一个对象的hashCode方法放回的哈希值是相同的</p>
+<p>② 如果两个对象通过equals方法比较是相等的，那么要求这两个对象的hashCode返回的哈希值也应该相同的</p>
+<p>③ 如果两个对象通equals方法比较是不同的，那么也不要求这两个对象的hashCode方法返回的值是不相同的（但是我们应该知道对于不同对象产生不同的哈希值对于哈希表能够提高性能的）</p>
+</blockquote>
+<p>借鉴：[Java面试题：重写了equals，还要重写hashCode？ | w3c笔记 (w3cschool.cn)](<a href="https://www.w3cschool.cn/article/4adce89bf8b821.html#:~:text=%E5%A4%A7%E8%87%B4%E6%84%8F%E6%80%9D%E6%98%AF%EF%BC%9A%E5%BD%93%E9%87%8D%E5%86%99">https://www.w3cschool.cn/article/4adce89bf8b821.html#:~:text=大致意思是：当重写</a> equals 方法后有必要将 hashCode 方法也重写，这样做才能保证不违背 hashCode,方法中”相同对象必须有相同哈希值”的约定。 此处只是提醒了我们重写 hashCode 方法的必要性，那其中提到的 hashCode 方法设计约定又是什么呢？)</p>
+<h3 id="（15）HashSet和TreeSet有什么区别？"><a href="#（15）HashSet和TreeSet有什么区别？" class="headerlink" title="（15）HashSet和TreeSet有什么区别？"></a>（15）HashSet和TreeSet有什么区别？</h3><blockquote>
+<p>HashSet: 由一个hash表实现，它的元素是无序的，add(),remove(),contains()方法的时间复杂度为O(1)</p>
+<p>TreeSet：由一个树形的结构来实现的，它里面的元素是有序的，add(),remove(),contains()方法的时间复杂度是O(logn)</p>
+</blockquote>
+<h3 id="（16）强引用，弱引用，软引用，虚引用的区别"><a href="#（16）强引用，弱引用，软引用，虚引用的区别" class="headerlink" title="（16）强引用，弱引用，软引用，虚引用的区别"></a>（16）强引用，弱引用，软引用，虚引用的区别</h3><blockquote>
+<p><strong>强引用（StrongReference）：</strong>最普遍的一种引用方式，例如String s &#x3D; “abc”，变量s就是字符串“abc”的强引用，只要强引用存在，则垃圾回收器就不会回收这个对象。</p>
+<p><strong>软引用（SoftReference）：</strong>用于描述还要用非必须的对象，如果内存足够，不回收，如果内存不足时，则回收。一般用于双向内存敏感的<strong>高速缓存</strong>，软引用可以和队列ReferenceQueue联合使用，如果软引用的对象被垃圾回收，JVM就会把这个软引用加入到与之关联的引用队列中</p>
+<p><strong>弱引用（WeakReference）</strong>：弱引用与软引用大致相同，弱引用与软引用的区别：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现只具有弱引用的对象，不管当前内存是否足够，都会回收它的内存</p>
+<p><strong>虚引用（PhantomReference）：</strong>就是形同虚设，与其他几种引用都不同，虚引用并不会决定对象的生命周期。如果一个对象只有虚引用，那么它和没有任何引用一样，在任何时候都可能被垃圾回收器回收。虚引用只要用来跟踪对象被垃圾回收器回收的活动。</p>
+<p>虚引用与弱引用和软引用的一个区别：虚引用必须与引用队列（ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引，就会在回收对象的内存之前，把这个虚引用加入到与之关联的引用队列中。</p>
+</blockquote>
+<p>详情：<a href="https://cloud.tencent.com/developer/article/1408097">Java 的强引用、弱引用、软引用、虚引用 - 腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+<h3 id="（17）new一个对象的过程和clone一个对象的过程"><a href="#（17）new一个对象的过程和clone一个对象的过程" class="headerlink" title="（17）new一个对象的过程和clone一个对象的过程"></a>（17）new一个对象的过程和clone一个对象的过程</h3><blockquote>
+<p>new一个对象：当程序执行到new操作符时，会先去确定new 的对象类型，因为知道了数据类型，才能知道要分配多大的内存空间。分配完内存，再调用构造函数，填充对象的各个域，这是对象的初始化，构造函数放回后，对象创建完成，将它的引用地址发布到外部，就可以通过这个引用来操作这个对象</p>
+<p>clone一个对象：调用clone方法时，先分配内存，与原对象的内存空间相同，再使用原对象中对应的各个域，填充新对象的各个域，完成后，clone方法返回，一个新的相同的对象被创建好，将引用发布到外部 </p>
+</blockquote>
+<h3 id="（18）Java中-x3D-x3D-和equals的区别"><a href="#（18）Java中-x3D-x3D-和equals的区别" class="headerlink" title="（18）Java中&#x3D;&#x3D;和equals的区别"></a>（18）Java中&#x3D;&#x3D;和equals的区别</h3><blockquote>
+<p>&#x3D;&#x3D; 是判断两个变量或实例是不是指向同一个内存空间；equals是判断两个变量或者实例所指向的内存空间内的值是否相同</p>
+</blockquote>
+<h3 id="（19）final，finalize和finally的区别"><a href="#（19）final，finalize和finally的区别" class="headerlink" title="（19）final，finalize和finally的区别"></a>（19）final，finalize和finally的区别</h3><blockquote>
+<p>final：用于声明属性，方法和类，分别表示属性不可变，方法不可被覆盖，类不可被继承</p>
+<p>finally：为异常处理语句结构的一部分，表示总是执行</p>
+<p>finalize：为object类中的一个方法，在垃圾回收器执行的时候会调用该对象的此方法，可以覆盖此方法提供方法垃圾收集时的其他资源回收，例如关闭文件。finalize（）方法是在垃圾收集器删除对象之前对这个对象调用的。</p>
+</blockquote>
+<h3 id="（20）Java创建对象的几种方式"><a href="#（20）Java创建对象的几种方式" class="headerlink" title="（20）Java创建对象的几种方式"></a>（20）Java创建对象的几种方式</h3><blockquote>
+<p>new 创建新对象</p>
+<p>通过反射机制</p>
+<p>采用clone机制（实现Cloneable接口）</p>
+<p>通过序列化机制（实现Serializable接口）</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyTest</span>()&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">// new</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">String</span>();</span><br><span class="line">        <span class="comment">// 反射</span></span><br><span class="line">        <span class="type">Class</span> <span class="variable">clazz</span> <span class="operator">=</span> String.class;</span><br><span class="line">        <span class="type">String</span> <span class="variable">s2</span> <span class="operator">=</span> (String) clazz.newInstance();</span><br><span class="line">        <span class="comment">// 使用clone方法</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">s3</span> <span class="operator">=</span> (String)s2.clone();</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>序列化机制参考：<a href="https://blog.csdn.net/qq_19782019/article/details/80422143">(38条消息) Java基础——对象的序列化（通俗易懂，排版优美）_刘扬俊的博客-CSDN博客</a></p>
+<h3 id="（21）-amp-和-amp-amp-的区别"><a href="#（21）-amp-和-amp-amp-的区别" class="headerlink" title="（21）&amp;和&amp;&amp;的区别"></a>（21）&amp;和&amp;&amp;的区别</h3><blockquote>
+<p>相同点：最终得到的boolean值结果一样</p>
+<p>不同点：&amp;既是逻辑运算符也是位运算,&amp;&amp;只是逻辑运算符；&amp;不具有短路效果，即左边false，右边也会执行，&amp;&amp;具有短路效果，左边为false，右边不会执行</p>
+</blockquote>
+<h3 id="（22）内部类有什么作用？"><a href="#（22）内部类有什么作用？" class="headerlink" title="（22）内部类有什么作用？"></a>（22）内部类有什么作用？</h3><blockquote>
+<p>1、内部类可以很好的实现隐藏，一般的非内部类，是不允许有private，protected权限的，但内部类可以</p>
+<p>2、内部类拥有外围类的所有元素的访问权限（内部类是外部类的一部分）</p>
+<p>3、可以间接实现多继承</p>
+<p>4、可以避免修改接口而实现同一个类中两种同名方法的调用</p>
+</blockquote>
+<p>借鉴：<a href="https://blog.csdn.net/u013728021/article/details/87358517">(38条消息) java内部类的四大作用_奋斗的bigHead的博客-CSDN博客</a></p>
+<h3 id="（23）深拷贝和浅拷贝的区别是什么？"><a href="#（23）深拷贝和浅拷贝的区别是什么？" class="headerlink" title="（23）深拷贝和浅拷贝的区别是什么？"></a>（23）深拷贝和浅拷贝的区别是什么？</h3><blockquote>
+<p><strong>浅拷贝：</strong>被复制对象的所有变量都含有与原来的对象相同的对象，而所有的对其他对象的引用仍然指向原来的对象。简而言之，浅拷贝仅仅复制考虑的对象，不能复制它引用的对象。</p>
+<p><strong>深拷贝：</strong>被复制对象的所有变量都含有与原来的对象相同的值，且原对象那些引用其他对象的变量将指向被复制过的新对象，而不是原有的那些被引用的对象。简而言之，深拷贝把复制的对象所引用的对象都复制了一遍。</p>
+</blockquote>
+<h3 id="（24）static的用法"><a href="#（24）static的用法" class="headerlink" title="（24）static的用法"></a>（24）static的用法</h3><blockquote>
+<p>Static可以修饰内部类、方法、变量、代码块</p>
+<p>Static修饰的类为静态内部类</p>
+<p>Static修饰的方法为静态方法，表示该方法属于当前类，类的所有对象共有；静态方法不能被重写；可以直接用类名点的形式调用；静态方法内不能使用this和super关键字</p>
+<p>Static修饰的变量为静态变量，静态变量被所有实例共享，不依赖于某个对象；静态变量在内存只有一份拷贝，在JVM加载类的时候，只为静态分配一次内存</p>
+<p>Static修饰的代码块为静态代码块，被用于程序优化；静态代码块中的代码在整个类加载的时候只会执行一次；静态代码块可以有多个，如果有多个，按照先后顺序依次执行</p>
+</blockquote>
+<h3 id="（25）什么是值传递和引用传递"><a href="#（25）什么是值传递和引用传递" class="headerlink" title="（25）什么是值传递和引用传递"></a>（25）什么是值传递和引用传递</h3><blockquote>
+<p><strong>值传递：</strong>在调用方法时将实际参数复制一份传递到方法中，在方法中对参数进行修改，不会影响到实际参数</p>
+<p><strong>引用传递：</strong>在调用方法时将实际参数的地址直接传递在方法内，在方法内对参数进行的修改，将会影响到实际参数</p>
+<p><strong>本质上的区别：</strong>实际参数是复制一份还是直接被拿去使用</p>
+</blockquote>
+<p>详细：<a href="https://blog.csdn.net/u013728021/article/details/87358517">(38条消息) java内部类的四大作用_奋斗的bigHead的博客-CSDN博客</a></p>
+<h3 id="（26）成员变量与局部变量的区别有哪些？"><a href="#（26）成员变量与局部变量的区别有哪些？" class="headerlink" title="（26）成员变量与局部变量的区别有哪些？"></a>（26）成员变量与局部变量的区别有哪些？</h3><blockquote>
+<p>1、从语法形式上，成员变量属于类，局部变量是在方法内定义的变量或者是方法的参数；成员变量可以被public，private，protected等修饰符修饰，而局部变量不能被权限修饰符和static所修饰（两者都能被final修饰）</p>
+<p>2、从变量的内存存储位置看，成员变量属于对象的一部分，对象存在于堆内存；局部变量存在与栈内存</p>
+<p>3、从变量在内存中的生存时间上看，成员变量随着对象的创建而存在；局部变量随着方法的调用而自动消失</p>
+<p>4、成员变量如果没有被赋初值，则会自动以类型的默认值而赋值（当被final和static修饰时（常量），一定要赋值）；局部变量没有被赋初值时，则不会被自动赋值</p>
+</blockquote>
+<h3 id="（27）静态方法和实例方法有何不同？"><a href="#（27）静态方法和实例方法有何不同？" class="headerlink" title="（27）静态方法和实例方法有何不同？"></a>（27）静态方法和实例方法有何不同？</h3><blockquote>
+<p>1、在外部调用静态方法时，可以用类名点的形式调用，也可以使用对象名点的形式调用，而调用实例方法只能是后者调用；调用静态方法无需创建对象，调用实例方法一定要创建对象</p>
+<p>2、静态方法只能访问本类的静态成员（即静态成员变量和静态方法）。而实例方法没有限制</p>
+</blockquote>
+<h3 id="（28）多态是什么？"><a href="#（28）多态是什么？" class="headerlink" title="（28）多态是什么？"></a>（28）多态是什么？</h3><blockquote>
+<p>多态是同一行为具有不同表现形式或形态的能力，即对象多种表现形式的体现，就是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量到底会指向哪个类，即一个引用变量到底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。</p>
+</blockquote>
+<h3 id="（29）多态存在的三个必要条件"><a href="#（29）多态存在的三个必要条件" class="headerlink" title="（29）多态存在的三个必要条件"></a>（29）多态存在的三个必要条件</h3><blockquote>
+<p>1、一定要有继承</p>
+<p>2、要有方法的重写</p>
+<p>3、父类引用指向子类对象（父类类型 变量名 &#x3D; new 子类构造器）</p>
+</blockquote>
+<h3 id="（30）TreeMap，HashMap，LinkedHashMap的区别"><a href="#（30）TreeMap，HashMap，LinkedHashMap的区别" class="headerlink" title="（30）TreeMap，HashMap，LinkedHashMap的区别"></a>（30）TreeMap，HashMap，LinkedHashMap的区别</h3><blockquote>
+<p>TreeMap：存储有序，默认时按key的升序排序，也可以指定比较器；当使用迭代器（Iterator）遍历时，得到的结果时排过序的</p>
+<p>HashMap：存储无序，具有很快的访问速度；只允许一条元素的key为null，value没有限制；不支持线程的同步</p>
+<p>LinkedHashMap：存储有序</p>
+</blockquote>
+<p>详细：<a href="https://www.cnblogs.com/acm-bingzi/p/javaMap.html">HashMap,LinkedHashMap,TreeMap的区别（转） - 贾树丙 - 博客园 (cnblogs.com)</a></p>
+<h3 id="（31）什么是反射"><a href="#（31）什么是反射" class="headerlink" title="（31）什么是反射"></a>（31）什么是反射</h3><blockquote>
+<p>在运行时，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法，这种动态获取信息以及动态调用对象的功能称为Java反射机制</p>
+<p>反射就是动态加载对象，并对对象进行剖析。</p>
+</blockquote>
+<h3 id="（32）反射的作用"><a href="#（32）反射的作用" class="headerlink" title="（32）反射的作用"></a>（32）反射的作用</h3><blockquote>
+<p>1、在运行时判断任意一个对象所属的类型</p>
+<p>2、在运行时构造任意一个类的对象</p>
+<p>3、在运行时判断任意一个类所具备的成员变量和方法</p>
+<p>4、在运行时调用任意一个对象的方法</p>
+</blockquote>
+<h3 id="（33）break和continue的区别"><a href="#（33）break和continue的区别" class="headerlink" title="（33）break和continue的区别"></a>（33）break和continue的区别</h3><blockquote>
+<p>两者都是用来控制循环的语句</p>
+<p>break用来完全结束一个循环语句，跳出循环体执行后面的语句</p>
+<p>continue是跳过本次循环，直接进行下次循环</p>
+</blockquote>
+<h3 id="（34）运行时异常与一般异常有何异同"><a href="#（34）运行时异常与一般异常有何异同" class="headerlink" title="（34）运行时异常与一般异常有何异同"></a>（34）运行时异常与一般异常有何异同</h3><blockquote>
+<p>异常表示程序运行过程中可能出现的非正常状态，运行时异常表示虚拟机的通常操作中可能遇到的异常，是一种常见运行错误。</p>
+<p>Java编译器要求方法必须声明抛出可能发生的非运行时异常，但是并不要求必须声明抛出未被捕获的运行时异常。</p>
+</blockquote>
+<h3 id="（35）Collection和Collections的区别"><a href="#（35）Collection和Collections的区别" class="headerlink" title="（35）Collection和Collections的区别"></a>（35）Collection和Collections的区别</h3><blockquote>
+<p>Collection时集合类的上级接口。继承它的接口主要有Set和List</p>
+<p>Collections是针对集合类的一个工具类（帮助类），提供了一系列静态方法实现对各种集合的搜索，排序，线程安全化等操作。简化了对集合的操作</p>
+</blockquote>
+<h3 id="（36）Error和Exception有什么区别"><a href="#（36）Error和Exception有什么区别" class="headerlink" title="（36）Error和Exception有什么区别"></a>（36）Error和Exception有什么区别</h3><blockquote>
+<p>Error：是系统中的错误，程序员是不能改变的和处理的，是在程序编译时出现的错误，只能通过修改程序才能修正。一般是指与虚拟机相关的问题，如系统崩溃，虚拟机错误，内存空间不足，方法调用栈溢等。对于这类错误的导致的应用程序中断，仅靠程序本身无法恢复和和预防，遇到这样的错误，建议让程序终止。</p>
+<p>Exception：表示程序可以处理的异常，可以捕获且可能恢复。遇到这类异常，应该尽可能处理异常，使程序恢复运行，而不应该随意终止异常。</p>
+</blockquote>
+<p>详细：<a href="https://blog.csdn.net/weixin_43698561/article/details/104382643">(38条消息) 面试题整理:Error与Exception的区别_exception与error区别_Jxfor。的博客-CSDN博客</a></p>
 ]]></content>
   </entry>
 </search>
