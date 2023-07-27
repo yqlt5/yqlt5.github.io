@@ -191,7 +191,7 @@
 <p><img src="/../pic/%E8%AE%BE%E7%BD%AEssh5.PNG" alt="设置ssh5"></p>
 <p>添加成功后</p>
 <blockquote>
-<p>输入：ssh -T <a href="mailto:&#103;&#x69;&#x74;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#x62;&#x2e;&#x63;&#111;&#x6d;">&#103;&#x69;&#x74;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#x62;&#x2e;&#x63;&#111;&#x6d;</a></p>
+<p>输入：ssh -T <a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#98;&#46;&#99;&#x6f;&#x6d;">&#103;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#98;&#46;&#99;&#x6f;&#x6d;</a></p>
 </blockquote>
 <p>第一次使用会出现这种，输入yes即可</p>
 <p><img src="/../pic/%E8%AE%BE%E7%BD%AEssh6.PNG" alt="设置ssh6"></p>
@@ -316,6 +316,12 @@
 <p>rounded：头像显示在圈圈内，不喜欢可以填false</p>
 <p>rotated：头像会根据鼠标的方向转圈（个人表示不喜）</p>
 <p>这样头像就设置好了</p>
+<h3 id="（2）添加搜索功能"><a href="#（2）添加搜索功能" class="headerlink" title="（2）添加搜索功能"></a>（2）添加搜索功能</h3><p>下载搜索插件</p>
+<blockquote>
+<p>npm  install  hexo-generator-searchdb</p>
+</blockquote>
+<p>在主题的_config.yml文件中</p>
+<p><img src="/../pic/%E6%90%9C%E7%B4%A2.png"></p>
 ]]></content>
   </entry>
   <entry>
@@ -715,6 +721,365 @@
 <p>Exception：表示程序可以处理的异常，可以捕获且可能恢复。遇到这类异常，应该尽可能处理异常，使程序恢复运行，而不应该随意终止异常。</p>
 </blockquote>
 <p>详细：<a href="https://blog.csdn.net/weixin_43698561/article/details/104382643">(38条消息) 面试题整理:Error与Exception的区别_exception与error区别_Jxfor。的博客-CSDN博客</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>八股文（架构）</title>
+    <url>/2023/07/07/Java%E5%85%AB%E8%82%A1%E6%96%87%EF%BC%88%E6%9E%B6%E6%9E%84%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="JVM问题"><a href="#JVM问题" class="headerlink" title="JVM问题"></a>JVM问题</h1><h2 id="什么是进程和线程？"><a href="#什么是进程和线程？" class="headerlink" title="什么是进程和线程？"></a>什么是进程和线程？</h2><blockquote>
+<p><strong>进程：</strong>进程是程序的一次执行过程，是系统运行的基本单位</p>
+<p><strong>线程：</strong>线程是比进程更小的执行单位，一个进程在其执行的过程中可以产生多个线程</p>
+</blockquote>
+<h2 id="内存泄露与内存溢出的区别"><a href="#内存泄露与内存溢出的区别" class="headerlink" title="内存泄露与内存溢出的区别"></a>内存泄露与内存溢出的区别</h2><blockquote>
+<p><strong>内存泄露：</strong>程序在申请内存后，无法释放已申请的内存空间</p>
+<p><strong>ThreadLocal内存泄露问题是怎么导致的？如何解决？</strong></p>
+<p>ThreadLocal中使用的Key为ThreadLocal的弱引用，但是Value是强引用，在垃圾回收时，key会被回收，但是Value是不会的，这样一来会出现Key为null的Entry，假如不做任何处理，Key为null的Entry永远都不会被回收，久而久之就造成了内存泄漏。使用完ThreadLocal建议调用remove方法。</p>
+<p><strong>内存溢出：</strong>程序申请内存时，没有足够的内存空间供其使用（OOM问题 OutOfMemory）</p>
+</blockquote>
+<h2 id="JVM的内存结构"><a href="#JVM的内存结构" class="headerlink" title="JVM的内存结构"></a>JVM的内存结构</h2><blockquote>
+<ul>
+<li>堆</li>
+<li>栈：由一个个栈帧组成</li>
+<li>本地方法栈</li>
+<li>程序计数器</li>
+<li>方法区（元空间）</li>
+</ul>
+</blockquote>
+<h2 id="Java对象的创建过程"><a href="#Java对象的创建过程" class="headerlink" title="Java对象的创建过程"></a>Java对象的创建过程</h2><blockquote>
+<p>① 类加载检查：先去常量池中去定位这个类的符号引用，并检查这个符号引用代表的类是否被加载过、解析和初始化过，没有，执行相对应的类加载过程（双亲委派机制）</p>
+<p>② 分配内存：虚拟机为新生对象分配内存，为对象分配空间的任务等同于把一块确定大小的内存从 Java 堆中划分出来。分配方式有<strong>“指针碰撞”</strong>和<strong>“空闲列表”</strong> 两种，<strong>选择哪种分配方式由 Java 堆是否规整决定，而 Java 堆是否规整又由所采用的垃圾收集器是否带有压缩整理功能决定。</strong></p>
+<p>​	<strong>指针碰撞：</strong>适用场景：堆内存规整的情况下</p>
+<p>​						原理：用过的内存全部整合到一边，没有用过的内存放在另一边，中间有一个分界指针，只需									要向着没用过的内存方向将该指针移动对象内存大小位置即可。</p>
+<p>​						GC收集器：Serial，ParNew</p>
+<p>​	<strong>空闲列表：</strong>使用场景：堆内存不完整的情况下</p>
+<p>​						原理：虚拟机维护一个列表，该列表记录哪个内存块是可用的，分配的时候，找一块足够大的									内存块分配给对象实例，最后更新列表记录。</p>
+<p>​						GC收集器：CMS</p>
+<p>​	Java堆内存是否完整取决于GC收集器的算法是”标记-清除“，还是”标记-整理“，复制算法堆内存也是完整的。（垃圾回收算法：分代收集理论，标记-复制算法，标记-整理算法，标记-清楚算法）</p>
+<p>​	<strong>内存分配并发问题：</strong></p>
+<p>​		CAS+失败重试： CAS 是乐观锁的一种实现方式。所谓乐观锁就是，每次不加锁而是假设没有冲突而去完成某项操作，如果因为冲突失败就重试，直到成功为止。<strong>虚拟机采用 CAS 配上失败重试的方式保证更新操作的原子性。</strong></p>
+<p>​		TLAB(Thread Local Allocation Buffer，本地线程分配缓冲)：为每一个线程预先在Eden区分配一块内存，JVM给线程中的对象分配内存时，会优先在TLAB中分配，当TLAB中的内存用尽时，再采用上述的CAS进行内存分配。</p>
+<p>③ 初始化</p>
+<p>​	内存分配完，虚拟机将分配到的内存空间都初始化为零值（不包含对象头），这一步操作保障了对象的实例在Java代码中可以不赋初始值就可以直接使用，程序可以直接访问到这些字段的数据类型所对应的零值。</p>
+<p>④ 设置对象头</p>
+<p>​	初始化完成，虚拟机堆对象进行必要的设置。例如该对象是哪个类的实例、如何能找到类的元数据信息、该对象的哈希码、对象的GC分代年龄等信息，这些信息都会存放在对象头中。另外，虚拟机会根据当前的运行状态，如是否启用偏向锁，对象头会有不同的设置方式。</p>
+<p>⑤ 执行init方法</p>
+<p>​	上述步骤完成，在虚拟机的角度看，一个新的对象已经创建完成，但是在JAVA程序的角度来看，对象创建才刚开始，init方法没有执行，所有字段都是零。执行new指令之后会接着执行init方法，把对象按照程序员的意愿进行初始化，这样真正可用的对象才算完整产生出来。</p>
+</blockquote>
+<h2 id="如何打破双亲委派机制？"><a href="#如何打破双亲委派机制？" class="headerlink" title="如何打破双亲委派机制？"></a>如何打破双亲委派机制？</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PrintClassLoaderTree</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">ClassLoader</span> <span class="variable">classLoader</span> <span class="operator">=</span> PrintClassLoaderTree.class.getClassLoader();</span><br><span class="line"></span><br><span class="line">        <span class="type">StringBuilder</span> <span class="variable">split</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuilder</span>(<span class="string">&quot;|--&quot;</span>);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">needContinue</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">while</span> (needContinue)&#123;</span><br><span class="line">            System.out.println(split.toString() + classLoader);</span><br><span class="line">            <span class="keyword">if</span>(classLoader == <span class="literal">null</span>)&#123;</span><br><span class="line">                needContinue = <span class="literal">false</span>;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                classLoader = classLoader.getParent();</span><br><span class="line">                split.insert(<span class="number">0</span>, <span class="string">&quot;\t&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">|--sun.misc.Launcher$AppClassLoader@18b4aac2</span><br><span class="line">    |--sun.misc.Launcher$ExtClassLoader@53bd815b</span><br><span class="line">        |--null</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>由于BootstrapClassLoader是C++实现的，在Java中没有相对应的类，所以拿到的值为null。</p>
+<p> 除了BootstrapClassLoader之外，其余类加载器都是继承自java.lang.ClassLoader。打破双亲委派机制就需要我们自定义类加载器，继承ClassLoader抽象类即可，并重写loadClass()方法，不盲目向上寻找，就是打破了JVM的双亲委派机制；如果不打破该机制，只需重写findClass()方法。</p>
+<p>如：Tomcat就打破就双亲委派机制。</p>
+</blockquote>
+<h1 id="Redis问题"><a href="#Redis问题" class="headerlink" title="Redis问题"></a>Redis问题</h1><h2 id="缓存击穿，缓存穿透，缓存雪崩的区别以及解决方法"><a href="#缓存击穿，缓存穿透，缓存雪崩的区别以及解决方法" class="headerlink" title="缓存击穿，缓存穿透，缓存雪崩的区别以及解决方法"></a>缓存击穿，缓存穿透，缓存雪崩的区别以及解决方法</h2><blockquote>
+<p><strong>缓存击穿：</strong>缓存中存在该数据，但是当请求发送过来时，数据刚好过期，导致大量的请求并发打到数据库，导致数据库宕机</p>
+<p>解决方案：</p>
+<p>① 条件允许下，可以将热点数据设置为永久数据</p>
+<p>② 使用分布式锁，拿到锁的请求才能去访问数据库</p>
+</blockquote>
+<blockquote>
+<p><strong>缓存穿透：</strong>大量请求一个不存的空数据，缓存中并没有这个空数据的key，导致大量请求去访问数据库，数据库因为压力而宕机</p>
+<p>解决方案：</p>
+<p>① 在缓存中存入一个空对像的key</p>
+<p>②使用布隆过滤器，在请求缓存之前就做一层判断，如果存在就去访问缓存，如果不存在就直接返回。（注：布隆过滤器存在一定的误判率）</p>
+</blockquote>
+<blockquote>
+<p><strong>缓存雪崩：</strong>与缓存击穿相类似，只不过缓存雪崩是大量的key同一时间失效，导致请求全部打到数据库上</p>
+<p>解决方案：</p>
+<p>① 给数据设置不同的过期时间，尽量避免数据同时过期</p>
+<p>② 熔断机制，保障一部分人的正常使用</p>
+<p>③ 提高数据库的容灾能力，使用分库分表，读写分离的策略</p>
+<p>④ 搭建redis集群</p>
+</blockquote>
+<h2 id="Redis-常用数据结构"><a href="#Redis-常用数据结构" class="headerlink" title="Redis 常用数据结构"></a>Redis 常用数据结构</h2><blockquote>
+<p>① string（字符串）</p>
+<p>② list（列表）：存储一个有序的字符串集合，支持快速添加、删除和获取元素，以及支持通过索引查找元素</p>
+<p>③ set（集合）：存储的是无序的元素集合，并支持集合间的基本集合运算，如交集、并集、差集等。</p>
+<p>④ hash（散列表）：通过key-value存储数据，key为字符串类型，value为字符串和整数型</p>
+<p>⑤ zset（有序集合）：存储的是一个有序的字符串集合，每个元素都有一个关联的分数，可以通过分数进行排序和范围查询。</p>
+</blockquote>
+<h3 id="底层数据结构"><a href="#底层数据结构" class="headerlink" title="底层数据结构"></a>底层数据结构</h3><blockquote>
+<p>散列、列表、跳跃表</p>
+</blockquote>
+<h2 id="持久化方案"><a href="#持久化方案" class="headerlink" title="持久化方案"></a>持久化方案</h2><blockquote>
+<p><strong>AOF:</strong> 将Redis所执行的所有指令都记录下来，在下次Redis重启时，只需要执行指令就可以了。</p>
+<p>实现方式：配置文件中开启aof支持，redis服务器启动时，会直接fork一个子线程，会直接在数据目录下创建aof文件，但是文件内容为空，后续每一个操作指令都会被保存在这个文件中。</p>
+<p>优点：数据丢失的风险大大降低，最多丢失1秒的数据</p>
+<p>缺点：数据文件比rdb大，使用aop文件进行数据恢复的时候速度较慢</p>
+<p>优化方式：当aof文件较大时，可以手动重写，输入bgrewriteaof，也可以自动重写，两个参数auto-aof-rewrite-percentage（比例，下一次文件大小与上一次文件大小的比较） 和auto-aof-rewrite-min-size（触发重写时的文件最大值）</p>
+<p>注：由于重写也是主线程重新fork一个子线程，去进行数据操作，fork子线程会带来redis服务器的性能损耗，重写的频率不要太频繁。</p>
+</blockquote>
+<blockquote>
+<p><strong>RDB:</strong> 定期更新，定期将Redis中的数据生成的快照同步到磁盘等介质上，磁盘上保存的是Redis 的内存快照。</p>
+<p>实现方式：</p>
+<p>​	① save ：在当前的Redis服务器进程进行RDB持久化，会阻塞其他客户端的指令，禁止使用</p>
+<p>​	② bgsave：基于当前的Redis服务器fork一个子线程去执行RDB持久化，不会阻塞其他客户端的指令</p>
+<p>优点：数据文件比AOF小，使用RDB恢复数据速度较快</p>
+<p>缺点：比较耗时，存在丢失数据的风险。</p>
+</blockquote>
+<blockquote>
+<p><strong>混合型持久化方案：</strong>aof-use-rdb-preamble yes配置文件</p>
+<p>特点：</p>
+<p>​	① Redis4.0之后默认开启，之前是RDB</p>
+<p>​	② 开启后，aof重写的部分会以RDB方式保存，后续的操作依旧以aop指令形式保存</p>
+<p><strong>选择方案：</strong></p>
+<ul>
+<li>追求恢复效率，对数据安全要求不高，选择RDB</li>
+<li>不追求恢复效率，对数据要求高，选择AOF</li>
+<li>既要追求恢复效率，对数据要求高，选择混合型持久化</li>
+</ul>
+</blockquote>
+<h2 id="Redis的淘汰策略"><a href="#Redis的淘汰策略" class="headerlink" title="Redis的淘汰策略"></a>Redis的淘汰策略</h2><h3 id="删除方式："><a href="#删除方式：" class="headerlink" title="删除方式："></a>删除方式：</h3><ol>
+<li><p><strong>定时删除：</strong>Redis未使用</p>
+</li>
+<li><p><strong>定期删除：</strong>Redis中的数据过期后，会将过期数据的键记录到过期字典中，在服务器内部中，有一个专门的线程去扫描这个过期字典，将过期字典中过期的键对应的值删除，所以过期数据不是立即删除。</p>
+</li>
+<li><p><strong>惰性删除：</strong>当我们去获取一个过期的键的值时，如果这个键没有被定期删除，我们也不会获取到这个值，redis服务器会直接删除这个值。</p>
+<blockquote>
+<p>注：惰性删除的触发机制是需要自动获取那个键对应的值，如果键过期了，但是没有主动去获取，那么这个键对应的值就会一直留在redis内存中，造成内存浪费。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="淘汰策略："><a href="#淘汰策略：" class="headerlink" title="淘汰策略："></a>淘汰策略：</h3><h3 id="常见的淘汰算法："><a href="#常见的淘汰算法：" class="headerlink" title="常见的淘汰算法："></a>常见的淘汰算法：</h3><ul>
+<li>LRU算法：基于数据的历史访问记录来进行淘汰，及缓存数据最近被访问的数据会被保留下来，而没被访问的数据会被清楚。实现方式可以是使用一个列表记录所有的缓存数据，每当有数据被访问时，将数据移动到最前端，当缓存满时，淘汰列表最后的数据。</li>
+<li>LFU算法：基于数据的访问频度来进行淘汰，及缓存数据访问频度较高的数据会被保留下来，而访问频度较低的数据会被清除。该算法的实现方式可以使用一个计数器来记录每个数据的访问频度，当缓存满时，淘汰使用频度最低的数据，如果多个数据使用频度一样，则选择最近最少使用的数据进行淘汰。</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line"># 1）volatile-lru   利用LRU算法移除设置过过期时间的key (LRU:最近使用 Least Recently Used ) </span><br><span class="line"># 3）volatile-random 移除设置过过期时间的随机key</span><br><span class="line"># 5）volatile-lfu：在内存不足时，Redis会在设置过了生存时间的key中干掉一个最少频次使用的key。</span><br><span class="line"># 7）volatile-ttl   移除即将过期的key(minor TTL) </span><br><span class="line"></span><br><span class="line"># 2）allkeys-lru   利用LRU算法移除任何key </span><br><span class="line"># 4）allkeys-random  移除随机key </span><br><span class="line"># 6）allkeys-lfu：在内存不足时，Redis会在全部的key中干掉一个最少频次使用的key。</span><br><span class="line"></span><br><span class="line"># 8）noeviction  不移除任何key，只是返回一个写错误 。默认选项</span><br></pre></td></tr></table></figure>
+
+<h2 id="Redis的分布式锁实现"><a href="#Redis的分布式锁实现" class="headerlink" title="Redis的分布式锁实现"></a>Redis的分布式锁实现</h2><h1 id="Spring问题"><a href="#Spring问题" class="headerlink" title="Spring问题"></a>Spring问题</h1><h2 id="Spring的事务传播行为："><a href="#Spring的事务传播行为：" class="headerlink" title="Spring的事务传播行为："></a>Spring的事务传播行为：</h2><table>
+<thead>
+<tr>
+<th>正确的事务传播行为</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>REQUIRED</td>
+<td>使用最多的一种事务传播行为，@Transactional默认传播行为。如果当前存在事务，则加入；没有，则创建一个事务</td>
+</tr>
+<tr>
+<td>REQUIRES_NEW</td>
+<td>创建一个新的事务，如果当前存在事务，则挂起当前事务，被此传播行为修饰的内部方法会新开启自己的事务，且开启的事务相互独立，互不干扰</td>
+</tr>
+<tr>
+<td>NESTED</td>
+<td>如果当前存在事务，则创建一个事务作为当前事务的嵌套事务来运行；如果当前没有事务，则创建一个新的事务</td>
+</tr>
+<tr>
+<td>MANDATORY</td>
+<td>如果存在事务，则加入事务；没有事务，则抛出异常</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>错误的事务传播行为</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SUPPORTS</td>
+<td>如果存在事务，则加入该事务；如果没有事务，则以非事务的方式继续运行</td>
+</tr>
+<tr>
+<td>NOT_SOPPORTED</td>
+<td>以非事务的方式运行，如果存在事务，则挂起当前事务</td>
+</tr>
+<tr>
+<td>NEVER</td>
+<td>以非事务方式运行，如果当前存在事务，则抛出异常</td>
+</tr>
+</tbody></table>
+<h2 id="Spring事务什么情况下会失效"><a href="#Spring事务什么情况下会失效" class="headerlink" title="Spring事务什么情况下会失效"></a>Spring事务什么情况下会失效</h2><blockquote>
+<p><a href="https://cloud.tencent.com/developer/article/2233995">Spring事务失效的12种场景-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+</blockquote>
+<h2 id="BeanFactory和ApplicationContext的区别"><a href="#BeanFactory和ApplicationContext的区别" class="headerlink" title="BeanFactory和ApplicationContext的区别"></a>BeanFactory和ApplicationContext的区别</h2><blockquote>
+<p><strong>两者的关系：</strong></p>
+<p>​	BeanFactory是Spring框架最核心的接口，提供了loc的配置机制；ApplicationContext继承了BeanFactory接口，拥有BeanFactory所有功能。一般称BeanFactory为IoC容器，而称ApplicationContext为应用上下文。y</p>
+<p><strong>两者的区别：</strong></p>
+<p>​	BeanFactory是懒加载，ApplicationContext则在初始化应用上下文时就实例化所有单实例的Bean，可以指定为延迟加载。</p>
+<p> BeanFactory在初始化容器时，并未实例化Bean，如果Bean的某一个属性没有注入，BeanFacotry加载后，直至首次调用getBean方法才会抛出异常；而ApplicationContext则在初始化应用上下文时初始化所有单实例的Bean，这样有利于检查所依赖属性是否已经注入。综上所述，通常情况下我们首选ApplicationContext。</p>
+<p>  由于ApplicationContext会预先初始化所有的Singleton Bean，于是在系统创建前期会有较大的系统开销，但一旦ApplicationContext初始化完成，程序后面获取Singleton Bean实例时候将有较好的性能。</p>
+</blockquote>
+<h2 id="Spring的循环依赖问题如何解决："><a href="#Spring的循环依赖问题如何解决：" class="headerlink" title="Spring的循环依赖问题如何解决："></a>Spring的循环依赖问题如何解决：</h2><blockquote>
+<p>再解决问题之前，引入一个spring的三级缓存概念：</p>
+<table>
+<thead>
+<tr>
+<th align="center">缓存名称</th>
+<th align="center">源码名称</th>
+<th align="center">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">一级缓存</td>
+<td align="center">singletonObjects</td>
+<td align="center">单例池，缓存已经经历了完整的生命周期，已经初始化完成的bean对象</td>
+</tr>
+<tr>
+<td align="center">二级缓存</td>
+<td align="center">earlySingletonObjects</td>
+<td align="center">缓存早期的bean对象（生命周期还没走完）</td>
+</tr>
+<tr>
+<td align="center">三级缓存</td>
+<td align="center">singletonFactories</td>
+<td align="center">缓存的是ObjectFactory，表示对象工厂，用来创建某个对象</td>
+</tr>
+</tbody></table>
+<p><strong>Bean的生命周期：</strong></p>
+<p>构造函数 —&gt; 依赖注入 —&gt; 检查是否继承Aware接口 —&gt;  BeanPostProcessr#before —&gt; 初始化方法 —&gt; BeanPostProcessr#after —&gt;销毁bean</p>
+<p><strong>一级缓存和二级缓存解决（一般对象，不能是代理对象）</strong>：</p>
+<p>A对象和B对象相会依赖，当A对象运行到依赖注入时，未完成的A对象被存储在二级缓存中，B对象进行创建时，会从二级缓存中获取A对象，进行对象的创建，并存入一级缓存中，这是A对象将从一级缓存取出B对象完成对象的创建。</p>
+<p><img src="/../pic/%E4%BA%8C%E7%BA%A7%E7%BC%93%E5%AD%98.png"></p>
+<p><strong>三级缓存解决（代理对象）：</strong></p>
+<p>A对象和B对象相互依赖，A对象进行实例化时，会生成一个ObjectFactory放入三级缓存中，这时B对象进行实例化，也会生成一个ObjectFactory放入三级缓存中，A对象的ObjectFactory会根据B对象需要的对象形式进行生成相对应的对象，并将其放入二级缓存中，这是B对象完成依赖注入，放入一级缓存缓存中，A对象在一级缓存中获取B对象，完成初始化。</p>
+<p><img src="/../pic/%E4%B8%89%E7%BA%A7%E7%BC%93%E5%AD%98.png"></p>
+<p><strong>上述缓存机制主要解决的是已经执行了构造方法的依赖问题，那么在构造方法中的依赖问题如何解决？</strong></p>
+<p>使用懒加载的形式解决构造方法中的依赖问题，@Lazy注解</p>
+</blockquote>
+<h2 id="SpringMVC的请求处理流程："><a href="#SpringMVC的请求处理流程：" class="headerlink" title="SpringMVC的请求处理流程："></a>SpringMVC的请求处理流程：</h2><blockquote>
+<p>首先是SpringMVC的核心组件：</p>
+<p>1、<strong>DispatcherServlet：中央处理器</strong>，负责接收请求、分发，并给予客户端响应。</p>
+<p>2、<strong>HandlerMapping：处理器映射器</strong>，根据uri去匹配查找能处理的Handler，并会将请求涉及到的拦截器和Handler一起封装。</p>
+<p>3、<strong>HandlerAdapter：处理器适配器</strong>，根据HandlerMapping找到的Handler，适配执行对应的Handler。</p>
+<p>4、<strong>Handler：请求处理器</strong>，处理实际请求的处理器。</p>
+<p>5、<strong>ViewResolver：视图解析器</strong>，根据Handler返回的逻辑视图&#x2F;视图，解析并渲染真正的视图，并传递给DispatcherServlet响应到客户端。</p>
+<p><strong>流程说明（传统不分离项目流程）：</strong></p>
+<p>① 客户端发送请求，DispatchedServlet拦截请求。</p>
+<p>② DispatcherServlet根据请求信息调用HandlerMapping，Handler根据uri去匹配查找能处理的Handler（处理程序，也就是Controller），并将涉及到的拦截器和Handler一起封装，返回给DispatcherServlet。</p>
+<p>③ DispatcherServlet调用HandlerAdapter适配器执行Handler。</p>
+<p>④ Handler完成对用户请求的处理后，会返回一个ModelAndView对象给DispatcherServlet，ModelAndView包含了数据模型以及对应的视图信息。</p>
+<p>⑤ ViewResolver根据逻辑View找到实际的View。</p>
+<p>⑥ DispatcherServlet将返回的Model传给View进行渲染。</p>
+<p>⑦ 将view放回给请求者。</p>
+<p><strong>流程说明（前后端分离项目流程）：</strong></p>
+<p>① 客户端发送请求，DispatchedServlet拦截请求。</p>
+<p>② DispatcherServlet根据请求信息调用HandlerMapping，Handler根据uri去匹配查找能处理的Handler（处理程序，也就是Controller），并将涉及到的拦截器和Handler一起封装，返回给DispatcherServlet。</p>
+<p>③ DispatcherServlet调用HandlerAdapter适配器执行Handler。</p>
+<p>④ 接口加上了@ResponseBody</p>
+<p>⑤ 通过HttpMessageConverter来返回结果转化未JSON并响应</p>
+</blockquote>
+<h2 id="SpringBoot的起步器原理"><a href="#SpringBoot的起步器原理" class="headerlink" title="SpringBoot的起步器原理"></a>SpringBoot的起步器原理</h2><blockquote>
+<p>@SpringBootApplication注解为一个复合注解，其包含的@EnableAutoConfiguration会自动装配，这是SpringBoot的核心注解。@EnableAutoConfiguration中引入了AutoConfigurationImportSelector类，该类中的getCandidateConfiguration方法会将所有自动配置的信息以List的形式返回，这些信息是以键值对的方式存储在META-INF&#x2F;spring.factories文件中。</p>
+<p>@Conditional条件判断，SpringBoot自动装配了大量的配置类，但是不是所有都是一开始就被加载，要满足一些条件才会被加载。@Conditional就是条件判断，只有满足其中的条件，才会被加载，大大提高了SpringBoot的性能。</p>
+</blockquote>
+<h1 id="MySQL问题"><a href="#MySQL问题" class="headerlink" title="MySQL问题"></a>MySQL问题</h1><h2 id="并发事务会什么问题呢？"><a href="#并发事务会什么问题呢？" class="headerlink" title="并发事务会什么问题呢？"></a>并发事务会什么问题呢？</h2><p><strong>1、脏读</strong></p>
+<blockquote>
+<p>一个事务读取数据并且对数据进行了修改，这个修改对其他事务是可见的，即使该事务没有提交。这时另一个事务读取了改数据，但第一个事务突然回滚，导致数据并没有被提交到数据库，那第二个的事务读取的就是脏数据，这就是脏读。</p>
+</blockquote>
+<p><strong>2、不可重复读</strong></p>
+<blockquote>
+<p>一个事务内多次读同一个数据，在这个事务没有结束时，另一个事务也访问了这个数据，那么在第一次事务两次读取数据之间，第二个事务对数据进行了修改，导致第一次事务两次读取的数据不同，这就是不可重复读。</p>
+</blockquote>
+<p><strong>3、幻读</strong></p>
+<blockquote>
+<p>发生在一个事务读取了几行数据，另一个事务插入了一些数据，在随后的查询中，第一个事务读取的数据有一些不同，就好像发生了幻觉一样，被称为幻读。</p>
+</blockquote>
+<h3 id="不可重复读和幻读的区别"><a href="#不可重复读和幻读的区别" class="headerlink" title="不可重复读和幻读的区别"></a>不可重复读和幻读的区别</h3><blockquote>
+<ul>
+<li>不可重复读的重点是内容修改或者记录减少</li>
+<li>幻读的重点在于记录新增</li>
+</ul>
+<p>幻读其实可以看作不可重复读的一种特殊情况，单独区分幻读的主要原因是要解决幻读和不可重复读的方案不同。</p>
+</blockquote>
+<h2 id="MySQL的日志文件："><a href="#MySQL的日志文件：" class="headerlink" title="MySQL的日志文件："></a>MySQL的日志文件：</h2><h1 id="Zookpeer问题"><a href="#Zookpeer问题" class="headerlink" title="Zookpeer问题"></a>Zookpeer问题</h1><h2 id="实现分布式锁"><a href="#实现分布式锁" class="headerlink" title="实现分布式锁"></a>实现分布式锁</h2><blockquote>
+<p>核心思想：客户端获取锁，则创建节点，使用完锁，则删除节点</p>
+<p>实现步骤：</p>
+<ol>
+<li>客户端获取锁时，在lock节点创建临时顺序+监听节点</li>
+<li>获取lock节点下的所有节点，进行比较顺序序号，如果自己是最小的，则获取锁；如果不是最小的，则注册事件监听器，对上一个比自己小的节点进行监听。</li>
+<li>当监听上一个节点被删除是，则该客户端的监听器会接到通知，此时重复第二步。</li>
+</ol>
+<p><strong>临时节点的优点：</strong>当客户端因为异常挂掉或者正常执行业务关闭后，这个节点会被自动删除，不会出现后续进程获取不到锁的问题。</p>
+<p><strong>顺序节点的好处：</strong>所有进程获取锁时，可以利用顺序好进行排队。</p>
+<p>后续节点只会监听他的上一个节点，而不是他的父节点，如果监听的是父节点，某个节点删除是，其他所有节点都会参与抢锁操作，这种现象被称之为惊群效应，Redis分布式锁存在惊群效应。</p>
+</blockquote>
+<h1 id="微服务框架问题"><a href="#微服务框架问题" class="headerlink" title="微服务框架问题"></a>微服务框架问题</h1><h2 id=""><a href="#" class="headerlink" title=""></a></h2><h1 id="计算机网络问题"><a href="#计算机网络问题" class="headerlink" title="计算机网络问题"></a>计算机网络问题</h1><h2 id="OSI七层模型是什么？TCP-x2F-IP四层模型？"><a href="#OSI七层模型是什么？TCP-x2F-IP四层模型？" class="headerlink" title="OSI七层模型是什么？TCP&#x2F;IP四层模型？"></a>OSI七层模型是什么？TCP&#x2F;IP四层模型？</h2><table>
+<thead>
+<tr>
+<th>OSI层次分层</th>
+<th>作用</th>
+<th>TCP&#x2F;IP模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>应用层</td>
+<td>为计算机用户提供服务</td>
+<td></td>
+</tr>
+<tr>
+<td>表示层</td>
+<td>数据处理（编解码、加密解密、压缩解压缩）</td>
+<td></td>
+</tr>
+<tr>
+<td>会话层</td>
+<td>管理（建立、维护、重连）应用程序之间的会话</td>
+<td>应用层</td>
+</tr>
+<tr>
+<td>传输层</td>
+<td>为两台主机进程之间的通信提供通用的数据传输服务</td>
+<td>传输层</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>路由和寻址（决定数据在网络的游走路径）</td>
+<td>网络层</td>
+</tr>
+<tr>
+<td>数据链路层</td>
+<td>帧编码和误差纠正</td>
+<td></td>
+</tr>
+<tr>
+<td>物理层</td>
+<td>透明地传送比特流传输</td>
+<td>网络接口层</td>
+</tr>
+</tbody></table>
+<h2 id="应用层常用的协议"><a href="#应用层常用的协议" class="headerlink" title="应用层常用的协议"></a>应用层常用的协议</h2><blockquote>
+<p><strong>HTTP（Hypertext Transfer Protocol，超文本传输协议）</strong>：基于TCP协议，是一种传输超文本和多媒体内容的协议，主要为Web浏览器与Web服务器之间的通信而设计的。</p>
+<p><strong>SMTP（Simple Mail Transfer Protocol，简单邮件发送协议）</strong>：基于TCP协议，是一种用于发送电子邮件的协议。注：SMTP只负责发送邮件，接收邮件需要使用POP3&#x2F;IMAP协议。</p>
+<p><strong>POP3&#x2F;IMAP（邮件接收协议）</strong>：基于TCP协议，用于邮件的接收。IMAP是比POP3更新的协议。IMAP支持邮件搜索、标记、分类、归档等高级功能，而且可以在多个设备之间同步邮件状态。几乎现在所有的电子邮件客户端和服务器都支持IMAP协议。</p>
+<p><strong>FTP（File Transfer Protocol，文件传输协议）</strong>：基于TCP协议，用于计算机之间传输文件，可以屏蔽操作系统和文件存储方式。注：FTP是一种不安全的协议，因为在传输过程中不对数据进行加密操作。建议在传输敏感数据，使用更安全的协议，如SFTP。</p>
+<p><strong>Telnet（远程登录协议）</strong>：基于TCP协议，通过一个终端登录其他的服务器，但是所有数据都是明文传输，这存在安全问题。现在更多是使用SSH协议，一种安全的网络传输协议。</p>
+<p><strong>SSH（Secure Shell Protocol）</strong>：基于TCP协议，通过加密和认证机制实现安全的访问和文件传输等业务。</p>
+<p><strong>RTP（Real-time Transport Protocol，实时传输协议）</strong>：基于UDP协议，支持TCP协议，提供了实时传输数据的功能，但不包含资源预留存、不保证传输质量，这些功能由WebRTP实现。</p>
+<p><strong>DNS（Domain Name System，域名管理系统）</strong>：基于UDP协议，用于解决域名和IP地址的映射问题。</p>
+</blockquote>
+<h2 id="传输层常见的协议"><a href="#传输层常见的协议" class="headerlink" title="传输层常见的协议"></a>传输层常见的协议</h2><blockquote>
+<p><strong>TCP（Transmission Control Protocol，传输控制协议）</strong>：提供面向连接的，可靠的数据传输服务。</p>
+<p><strong>UDP（User Datagram Protocol，用户数据协议）</strong>：提供无连接的，尽最大努力的数据传输服务（不保证数据传输的可靠性），简单高效。</p>
+</blockquote>
+<h2 id="网络层常见的协议"><a href="#网络层常见的协议" class="headerlink" title="网络层常见的协议"></a>网络层常见的协议</h2><blockquote>
+<p><strong>IP（Internet Protocol，网际协议）</strong>：TCP&#x2F;IP协议中最重要的协议之一，主要作用是定义数据包的格式、对数据包进行路由和寻址，以便数据包可以跨网络传播并到达正确的目的地。目前IP协议，一为IPv4，一为IPv6。</p>
+<p><strong>ARP（Address Resolution Protocol，地址解析协议）</strong>：只要解决的是网络层地址和链路层地址之间的转换问题。因为一个 IP 数据报在物理上传输的过程中，总是需要知道下一跳（物理上的下一个目的地）该去往何处，但 IP 地址属于逻辑地址，而 MAC 地址才是物理地址，ARP 协议解决了 IP 地址转 MAC 地址的一些问题。</p>
+<p><strong>ICMP（Internet Control Message Protocol，互联网控制报文协议）</strong>：用于传输网络状态和错误消息的协议，常用于网络诊断和故障排除。例如，ping工具就是使用了ICMP协议来测试网络连通性。</p>
+<p><strong>NAT（Network Address Translation，网络地址转换协议）</strong>：NAT协议的应用场景在网络地址转换，应用于内部网到外部网的地址转换过程中。具体地说，在一个子网（局域网，LAN）内，各主机使用的是同一个LAN下的IP地址，但在LAN外，在广域网（WAN）中，需要一个统一的IP地址来标识LAN在整个Internet上的位置。</p>
+<p><strong>OSPF（Open Shorted Path First，开放式最短路径优先）</strong>：一种内部网关协议（Interior Gateway Protocol，IGP），也是广泛使用的一种动态路由协议，基于链路状态算法，考虑了链路的带宽、延迟等因素来选择最佳路径。</p>
+<p><strong>RIP（Routing Information Protocol，路由信息协议）</strong>：一种内部网关协议，也是一种动态路由协议（Interior Gateway Protocol，IGP），基于距离向量算法，使用固定的跳数作为度量标准，选择跳数最少的路径作为最佳路径。</p>
+<p><strong>BGP（Border Gateway Protocol，边界信息协议）</strong>：一种用来在路由选择域之间交换网络层可达性信息（Network Layer Reachability Information，NLRI）的路由选择协议，具有高度的灵活性和可扩展性。</p>
+</blockquote>
+<h2 id="输入URL到页面发生了什么？"><a href="#输入URL到页面发生了什么？" class="headerlink" title="输入URL到页面发生了什么？"></a>输入URL到页面发生了什么？</h2><blockquote>
+<p>1、DNS解析：因为浏览器不能直接通过域名找到对应的IP服务器，所以需要DNS进行解析，找到相对应的IP服务器。</p>
+<p>2、建立TCP连接（三次握手）</p>
+<p>3、发送HTTP请求</p>
+<p>4、相对应的IP服务器处理请求并返回HTTP报文</p>
+<p>5、浏览器解析并渲染页面</p>
+<p>6、连接结束</p>
+</blockquote>
+<h2 id="HTTP和HTTPS的区别"><a href="#HTTP和HTTPS的区别" class="headerlink" title="HTTP和HTTPS的区别"></a>HTTP和HTTPS的区别</h2><blockquote>
+<p><strong>端口号</strong>：HTTP默认是80，HTTPS默认是443</p>
+<p><strong>URL前缀</strong>：HTTP的URL是http:&#x2F;&#x2F;，HTTPS的URL为https:&#x2F;&#x2F;</p>
+<p><strong>安全性和资源消耗</strong>：HTTP协议运行在TCP之上，传输的内容都是明文，客户端和服务器之间都不能验证对方的身份。HTTPS是运行在SSL&#x2F;TLS之上的HTTP协议，SSL&#x2F;TLS是运行在TCP之上的，所有传输的内容都是密文，加密使用对称加密，但对称加密的密钥是用服务器方的证书进行非对称加密。所以说，HTTP安全性没有HTTPS高，但是HTTPS比HTTP消耗更多的资源。</p>
+<p><strong>SEO（搜索引擎优化）</strong>：搜索引擎更青睐使用HTTPS协议的网站，因为HTTPS能够提供更高的安全性和用户隐私保护。使用HTTPS协议的网站在搜索结果中可能会被优先显示，从而对SEO产生影响。</p>
+</blockquote>
 ]]></content>
   </entry>
 </search>
